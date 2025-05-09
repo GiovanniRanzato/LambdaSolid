@@ -17,5 +17,5 @@ class TestMain:
     def test_main(self, event_dict, context_dict, mocker):
         logging_mock = mocker.patch('logging.info')
         main.lambda_handler(event_dict, context_dict)
-        logging_mock.assert_called_once_with("lambda_handler calledw")
+        logging_mock.assert_called_once_with("lambda_handler called")
 
