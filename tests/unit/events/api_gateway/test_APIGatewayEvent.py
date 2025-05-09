@@ -34,3 +34,10 @@ class TestAPIGatewayEvent:
     ])
     def test_is_valid(self, events, is_valid):
         assert APIGatewayEvent.is_valid(events) is is_valid
+
+    def test_get_event_type(self, api_gateway_event):
+        assert api_gateway_event.get_event_type() == "APIGatewayEvent"
+
+    def test_invalid_event(self):
+        with pytest.raises(ValueError, match="Invalid event format for APIGatewayEvent: {'invalid_event': 'value'}"):
+            APIGatewayEvent.from_dict(event={"invalid_event": "value"}, context={})
