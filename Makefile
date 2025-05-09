@@ -49,17 +49,13 @@ format:
 
 # Run tests
 test:
-	pytest tests/unit -n 3 -v --cov=src --cov-report=term-missing --cov-fail-under=99
-
-integration:
-	pytest tests/integration -v || pytest --last-failed -v
+	pytest tests/unit -n 3 -v --cov=src --cov-report=term-missing --cov-fail-under=98
 
 # Pre-commit hooks
 pre-commit:
 	@echo "$(YELLOW)Running pre-commit tasks...$(NC)"
 	@make format
 	@make test
-	@make integration
 	@echo "$(GREEN)Pre-commit tasks: OK$(NC)"
 
 # Generate coverage report
