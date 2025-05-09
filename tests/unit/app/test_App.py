@@ -23,11 +23,7 @@ class TestApp:
     @pytest.fixture
     def app(self, events_registry, event_factory, event_handler_factory):
         events_registry.register_event = MagicMock()
-        return App(
-            event_factory=event_factory,
-            handler_factory=event_handler_factory,
-            events_registry=events_registry
-        )
+        return App(event_factory=event_factory, handler_factory=event_handler_factory, events_registry=events_registry)
 
     def test_init(self, app, events_registry, event_factory, event_handler_factory):
         assert app.events_registry == events_registry
@@ -39,8 +35,8 @@ class TestApp:
         # events_registry.register_event.assert_called_once_with(APIGatewayEvent, APIGatewayHandler)
 
     def test_run(self, app, event_factory, event_handler_factory):
-        event = {'key': 'value'}
-        context = {'context_key': 'context_value'}
+        event = {"key": "value"}
+        context = {"context_key": "context_value"}
 
         parsed_event = MagicMock()
         event_factory.create_event.return_value = parsed_event

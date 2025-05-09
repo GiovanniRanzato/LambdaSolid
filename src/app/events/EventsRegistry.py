@@ -10,13 +10,11 @@ class EventsRegistry:
 
     @classmethod
     def register_event(cls, event_class: Type[EventI], event_handler_class: Type[HandlerI]):
-
         cls._events_registry[event_class.__name__] = event_class
         cls._handlers_registry[event_class.__name__] = event_handler_class
 
-    def get_events_registry(self) ->  {str, Type[EventI]}:
+    def get_events_registry(self) -> {str, Type[EventI]}:
         return self._events_registry
 
-    def get_handlers_registry(self) ->  {str, Type[HandlerI]}:
+    def get_handlers_registry(self) -> {str, Type[HandlerI]}:
         return self._handlers_registry
-

@@ -11,4 +11,3 @@ class Container(containers.DeclarativeContainer):
     events_registry = providers.Singleton(EventsRegistry)
     event_factory = providers.Factory(EventFactory, events_registry=events_registry)
     handler_factory = providers.Factory(HandlerFactory, events_registry=events_registry)
-

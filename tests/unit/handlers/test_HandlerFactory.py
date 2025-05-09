@@ -12,6 +12,7 @@ class DummyHandler(HandlerI):
     def handle(self, event):
         pass
 
+
 class TestHandlerFactory:
     @pytest.fixture
     def events_registry(self):
@@ -20,7 +21,6 @@ class TestHandlerFactory:
     @pytest.fixture
     def handler_factory(self, events_registry):
         return HandlerFactory(events_registry=events_registry)
-
 
     def test_init(self, handler_factory, events_registry):
         assert isinstance(handler_factory, HandlerFactory)
@@ -31,9 +31,7 @@ class TestHandlerFactory:
         event = MagicMock(spec=EventI)
         event.get_event_type.return_value = event_type = "TestEvent"
 
-        events_registry.get_handlers_registry.return_value = {
-            event_type: DummyHandler
-        }
+        events_registry.get_handlers_registry.return_value = {event_type: DummyHandler}
 
         # Execute
         handler = handler_factory.create_handler(event)

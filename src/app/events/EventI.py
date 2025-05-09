@@ -16,4 +16,3 @@ class EventI(ABC):
     @abstractmethod
     def is_valid(cls, event: dict) -> bool:
         """Check if the event is valid"""
-

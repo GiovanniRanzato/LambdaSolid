@@ -16,4 +16,3 @@ class HandlerFactory:
             raise ValueError(f"No handler registered for event type: {event_type}")
 
         return handler_class()
-

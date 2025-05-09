@@ -4,6 +4,7 @@ from app.events.EventsRegistry import EventsRegistry
 from app.events.EventFactory import EventFactory
 from app.handlers.HandlerFactory import HandlerFactory
 
+
 class TestContainers:
     @pytest.fixture
     def container(self) -> Container:

@@ -17,8 +17,6 @@ class APIGatewayEvent(EventI):
 
         return cls(event=event, context=context)
 
-
     @classmethod
     def is_valid(cls, event: dict) -> bool:
         return "routeKey" in event and "requestContext" in event
-

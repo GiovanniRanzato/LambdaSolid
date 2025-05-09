@@ -43,5 +43,3 @@ class TestEventRegistry:
         handlers_registry = event_registry.get_handlers_registry()
 
         assert handlers_registry == {event_type.__name__: handler_type}
-
-

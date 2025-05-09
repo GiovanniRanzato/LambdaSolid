@@ -2,7 +2,6 @@ from app.events.EventI import EventI
 from app.events.EventsRegistry import EventsRegistry
 
 
-
 class EventFactory:
     def __init__(self, events_registry: EventsRegistry):
         self.events_registry = events_registry
