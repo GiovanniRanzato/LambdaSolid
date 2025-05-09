@@ -2,7 +2,7 @@ import pytest
 from containers import Container
 from app.events.EventsRegistry import EventsRegistry
 from app.events.EventFactory import EventFactory
-from app.events.handlers.HandlerFactory import HandlerFactory
+from app.handlers.HandlerFactory import HandlerFactory
 
 class TestContainers:
     @pytest.fixture
@@ -26,8 +26,8 @@ class TestContainers:
 
     def test_event_factory(self, container, event_factory, registry):
         assert isinstance(event_factory, EventFactory)
-        assert event_factory.event_registry is registry
+        assert event_factory.events_registry is registry
 
     def test_event_handler_factory(self, container, event_handler_factory, registry):
         assert isinstance(event_handler_factory, HandlerFactory)
-        assert event_handler_factory.event_registry is registry
+        assert event_handler_factory.events_registry is registry
