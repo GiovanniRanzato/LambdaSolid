@@ -19,7 +19,7 @@ class TestContainers:
         return container.event_factory()
 
     @pytest.fixture
-    def event_handler_factory(self, container) -> HandlerFactory:
+    def handler_factory(self, container) -> HandlerFactory:
         return container.handler_factory()
 
     def test_event_registry(self, container, registry):
@@ -29,6 +29,6 @@ class TestContainers:
         assert isinstance(event_factory, EventFactory)
         assert event_factory.events_registry is registry
 
-    def test_event_handler_factory(self, container, event_handler_factory, registry):
-        assert isinstance(event_handler_factory, HandlerFactory)
-        assert event_handler_factory.events_registry is registry
+    def test_handler_factory(self, container, handler_factory, registry):
+        assert isinstance(handler_factory, HandlerFactory)
+        assert handler_factory.events_registry is registry
