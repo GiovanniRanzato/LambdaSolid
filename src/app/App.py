@@ -23,7 +23,7 @@ class App:
     def _register_events(self):
         # Register events and relative handlers here:
         # Example:
-        # self.events_registry.register_event(APIGatewayEvent, APIGatewayHandler)
+        self.events_registry.register_event(APIGatewayEvent, APIGatewayHandler)
         pass
 
     def run(self, event: dict, context: dict):
