@@ -4,8 +4,8 @@ from app.events.EventFactory import EventFactory
 from app.events.EventsRegistry import EventsRegistry
 from app.handlers.HandlerFactory import HandlerFactory
 
-from app.events.api_gateway.APIGatewayEvent import APIGatewayEvent
-from app.handlers.APIGatewayHandler import APIGatewayHandler
+from app.api.api_gateway.APIGatewayEvent import APIGatewayEvent
+from app.api.api_gateway.APIGatewayHandler import APIGatewayHandler
 from containers import Container
 
 

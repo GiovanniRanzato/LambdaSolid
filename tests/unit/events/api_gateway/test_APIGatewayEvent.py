@@ -1,5 +1,5 @@
 import pytest
-from app.events.api_gateway.APIGatewayEvent import APIGatewayEvent
+from app.api.api_gateway.APIGatewayEvent import APIGatewayEvent
 
 
 class TestAPIGatewayEvent:
