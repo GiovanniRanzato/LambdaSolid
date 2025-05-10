@@ -2,9 +2,9 @@ from typing import Type
 
 import pytest
 
-from app.events.EventI import EventI
-from app.events.EventsRegistry import EventsRegistry
-from app.handlers.HandlerI import HandlerI
+from infrastructure.interfaces.EventI import EventI
+from infrastructure.EventsRegistry import EventsRegistry
+from infrastructure.interfaces.HandlerI import HandlerI
 
 
 class TestEventRegistry:

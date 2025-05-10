@@ -1,6 +1,6 @@
 import pytest
 
-from app.App import App
+from infrastructure.App import App
 from src import main
 
 

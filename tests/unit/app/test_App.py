@@ -1,10 +1,10 @@
 from unittest.mock import MagicMock
 
 import pytest
-from app.App import App
-from app.events.EventFactory import EventFactory
-from app.events.EventsRegistry import EventsRegistry
-from app.handlers.HandlerFactory import HandlerFactory
+from infrastructure.App import App
+from infrastructure.factories.EventFactory import EventFactory
+from infrastructure.EventsRegistry import EventsRegistry
+from infrastructure.factories.HandlerFactory import HandlerFactory
 
 
 class TestApp:

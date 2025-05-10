@@ -1,8 +1,8 @@
 # main.py
 import logging
 
-from app.App import App
-from containers import Container
+from infrastructure.App import App
+from infrastructure.containers import Container
 
 
 def lambda_handler(

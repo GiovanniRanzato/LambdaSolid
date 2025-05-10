@@ -1,12 +1,12 @@
 from dependency_injector.wiring import inject, Provide
 
-from app.events.EventFactory import EventFactory
-from app.events.EventsRegistry import EventsRegistry
-from app.handlers.HandlerFactory import HandlerFactory
+from infrastructure.factories.EventFactory import EventFactory
+from infrastructure.EventsRegistry import EventsRegistry
+from infrastructure.factories.HandlerFactory import HandlerFactory
 
-from app.api.api_gateway.APIGatewayEvent import APIGatewayEvent
-from app.api.api_gateway.APIGatewayHandler import APIGatewayHandler
-from containers import Container
+from api.api_gateway.APIGatewayEvent import APIGatewayEvent
+from api.api_gateway.APIGatewayHandler import APIGatewayHandler
+from infrastructure.containers import Container
 
 
 class App:

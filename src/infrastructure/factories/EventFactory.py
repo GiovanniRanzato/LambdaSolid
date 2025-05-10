@@ -1,5 +1,5 @@
-from app.events.EventI import EventI
-from app.events.EventsRegistry import EventsRegistry
+from infrastructure.interfaces.EventI import EventI
+from infrastructure.EventsRegistry import EventsRegistry
 
 
 class EventFactory:

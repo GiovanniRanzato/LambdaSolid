@@ -1,8 +1,8 @@
 import pytest
-from containers import Container
-from app.events.EventsRegistry import EventsRegistry
-from app.events.EventFactory import EventFactory
-from app.handlers.HandlerFactory import HandlerFactory
+from infrastructure.containers import Container
+from infrastructure.EventsRegistry import EventsRegistry
+from infrastructure.factories.EventFactory import EventFactory
+from infrastructure.factories.HandlerFactory import HandlerFactory
 
 
 class TestContainers:

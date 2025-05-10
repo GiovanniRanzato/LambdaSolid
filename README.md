@@ -34,3 +34,39 @@ This will prepare your environment and install the necessary dependencies.
 ```shell
   make coverage
 ```
+
+## 🧱 Project Structure – Hexagonal Architecture
+
+LambdaSolid follows a [Hexagonal Architecture (Ports & Adapters)](https://alistair.cockburn.us/hexagonal-architecture/) design, which promotes **separation of concerns**, **testability**, and **independence from infrastructure**.
+
+```
+src/
+├── domain/                       # Core business logic (pure)
+│   ├── models/                   # Domain entities (e.g. Order, User)
+│   ├── services/                 # Business use cases
+│   └── interfaces/               # Abstract ports (e.g. RepositoryI)
+│
+├── infrastructure/              # Frameworks & technical details
+│   ├── factories/               # Technical components factories (e.g. EventFactory, HandlerFactory)
+│   ├── interfaces/              # Technical interfaces (e.g. EventI, HandlerI)
+│   ├── App.py                   # Application orchestrator (wires everything)
+│   ├── EventsRegistry.py        # Internal event routing registry
+│   └── containers.py            # Dependency injection setup (via `dependency_injector`)
+│
+├── api/                         # Input adapters (events/APIs)
+│   └── api_gateway/             # Logic for API Gateway events (e.g. FastAPI routing)
+│
+├── repositories/                # Output adapters (DB, SNS, etc.)
+│   └── db/                      # Example: DB repositories implementing interfaces
+│
+├── main.py                      # AWS Lambda entrypoint
+└── tests/                       # Unit/integration tests (mirroring the src structure)
+```
+
+### Key Concepts
+
+- `domain/` is **framework-agnostic** and contains the heart of the business logic.
+- `infrastructure/` deals with **how** the logic is executed (frameworks, DI, factories).
+- `api/` and `repositories/` are **adapters** that handle external I/O.
+- `main.py` is the **entrypoint** for your AWS Lambda deployment.
+- Interfaces like `EventI`, `HandlerI`, and the `EventsRegistry` are placed in `infrastructure/` because they **serve technical routing**, not domain rules.

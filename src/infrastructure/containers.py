@@ -1,8 +1,8 @@
 from dependency_injector import containers, providers
 
-from app.events.EventFactory import EventFactory
-from app.events.EventsRegistry import EventsRegistry
-from app.handlers.HandlerFactory import HandlerFactory
+from infrastructure.factories.EventFactory import EventFactory
+from infrastructure.EventsRegistry import EventsRegistry
+from infrastructure.factories.HandlerFactory import HandlerFactory
 
 
 class Container(containers.DeclarativeContainer):

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from app.events.EventI import EventI
+from infrastructure.interfaces.EventI import EventI
 
 
 class HandlerI(ABC):

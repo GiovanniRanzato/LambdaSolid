@@ -1,6 +1,6 @@
-from app.events.EventI import EventI
-from app.handlers.HandlerI import HandlerI
-from app.events.EventsRegistry import EventsRegistry
+from infrastructure.interfaces.EventI import EventI
+from infrastructure.interfaces.HandlerI import HandlerI
+from infrastructure.EventsRegistry import EventsRegistry
 
 
 class HandlerFactory:

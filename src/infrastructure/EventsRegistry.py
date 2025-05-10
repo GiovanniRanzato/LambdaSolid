@@ -1,7 +1,7 @@
 from typing import Type
 
-from app.events.EventI import EventI
-from app.handlers.HandlerI import HandlerI
+from infrastructure.interfaces.EventI import EventI
+from infrastructure.interfaces.HandlerI import HandlerI
 
 
 class EventsRegistry:

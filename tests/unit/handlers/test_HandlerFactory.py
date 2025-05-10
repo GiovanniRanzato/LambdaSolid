@@ -2,10 +2,10 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from app.events.EventI import EventI
-from app.events.EventsRegistry import EventsRegistry
-from app.handlers.HandlerFactory import HandlerFactory
-from app.handlers.HandlerI import HandlerI
+from infrastructure.interfaces.EventI import EventI
+from infrastructure.EventsRegistry import EventsRegistry
+from infrastructure.factories.HandlerFactory import HandlerFactory
+from infrastructure.interfaces.HandlerI import HandlerI
 
 
 class DummyHandler(HandlerI):

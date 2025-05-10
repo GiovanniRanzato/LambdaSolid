@@ -1,4 +1,4 @@
-from app.events.EventI import EventI
+from infrastructure.interfaces.EventI import EventI
 
 
 class APIGatewayEvent(EventI):

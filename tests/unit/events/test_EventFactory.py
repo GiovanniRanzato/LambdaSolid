@@ -1,9 +1,9 @@
 from unittest.mock import MagicMock
 
 import pytest
-from app.events.EventFactory import EventFactory
-from app.events.EventI import EventI
-from app.events.EventsRegistry import EventsRegistry
+from infrastructure.factories.EventFactory import EventFactory
+from infrastructure.interfaces.EventI import EventI
+from infrastructure.EventsRegistry import EventsRegistry
 
 
 class TestEventFactory:
