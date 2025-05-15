@@ -4,7 +4,7 @@ from infrastructure.factories.EventFactory import EventFactory
 from infrastructure.EventsRegistry import EventsRegistry
 from infrastructure.factories.HandlerFactory import HandlerFactory
 
-from api.api_gateway.APIGatewayEvent import APIGatewayEvent
+from api.api_gateway.events.APIGatewayEventV1 import APIGatewayEventV1
 from api.api_gateway.APIGatewayHandler import APIGatewayHandler
 from infrastructure.containers import Container
 
@@ -26,10 +26,10 @@ class App:
     def _register_events(self):
         # Register events and relative handlers here:
         # Example:
-        self.events_registry.register_event(APIGatewayEvent, APIGatewayHandler)
+        self.events_registry.register_event(APIGatewayEventV1, APIGatewayHandler)
         pass
 
     def run(self, event: dict, context: dict):
         parsed_event = self.event_factory.create_event(event, context)
         handler = self.handler_factory.create_handler(parsed_event)
-        handler.handle(event=parsed_event)
+        return handler.handle(event=parsed_event)
