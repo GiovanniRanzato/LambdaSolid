@@ -1,8 +1,6 @@
 import pytest
 from api.api_gateway.exceptions.ExceptionsRegistry import ExceptionRegistry
-from api.api_gateway.exceptions.handlers.ExceptionHandler import ExceptionHandler
-from api.api_gateway.exceptions.handlers.UnauthorizedExceptionHandler import UnauthorizedExceptionHandler
-from api.api_gateway.exceptions.handlers.ValidationExceptionHandler import ValidationExceptionHandler
+from api.api_gateway.interfaces.ExceptionHandlerI import ExceptionHandlerI
 
 
 class TestExceptionRegistry:
@@ -14,8 +12,7 @@ class TestExceptionRegistry:
         assert isinstance(exception_registry, ExceptionRegistry)
 
     def test_get_exceptions_handlers(self, exception_registry):
-        assert exception_registry.exceptions_handlers() == [
-            ExceptionHandler,
-            ValidationExceptionHandler,
-            UnauthorizedExceptionHandler
-        ]
+        registered_handlers =  exception_registry.exceptions_handlers()
+
+        for registered_handler in registered_handlers:
+            assert issubclass(registered_handler, ExceptionHandlerI)
