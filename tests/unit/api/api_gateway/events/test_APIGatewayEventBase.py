@@ -6,8 +6,8 @@ class TestAPIGatewayEventBase:
     @pytest.fixture
     def event_dict(self):
         return {
-            "routeKey": "test_route",
-            "requestContext": "requestContext",
+            "resource": "/{proxy+}",
+            "httpMethod": "POST",
         }
 
     @pytest.fixture
@@ -33,7 +33,7 @@ class TestAPIGatewayEventBase:
 
     @pytest.mark.parametrize(
         "events,is_valid",
-        [({"routeKey": "valid value", "requestContext": "valid value"}, True), ({"invalid": "invalid"}, False)],
+        [({"resource": "/{proxy+}", "httpMethod": "POST"}, True), ({"invalid": "invalid"}, False)],
     )
     def test_is_valid(self, events, is_valid):
         assert APIGatewayEventBase.is_valid(events) is is_valid
