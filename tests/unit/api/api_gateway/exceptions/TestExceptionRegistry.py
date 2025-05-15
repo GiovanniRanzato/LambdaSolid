@@ -12,7 +12,7 @@ class TestExceptionRegistry:
         assert isinstance(exception_registry, ExceptionRegistry)
 
     def test_get_exceptions_handlers(self, exception_registry):
-        registered_handlers =  exception_registry.exceptions_handlers()
+        registered_handlers = exception_registry.exceptions_handlers()
 
         for registered_handler in registered_handlers:
             assert issubclass(registered_handler, ExceptionHandlerI)

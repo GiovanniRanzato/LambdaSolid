@@ -15,7 +15,7 @@ class ExceptionHandler(ExceptionHandlerI):
         return Exception
 
     @classmethod
-    def handle (cls, request: Request, exception: Exception):
+    def handle(cls, request: Request, exception: Exception):
         error_message = exception.args[0] if exception.args else str(exception)
         logging.error(traceback.format_exc())
         logging.error(error_message)
@@ -23,7 +23,3 @@ class ExceptionHandler(ExceptionHandlerI):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             content={"detail": f"Something went wrong {error_message}"},
         )
-
-
-
-

@@ -13,4 +13,3 @@ class ExceptionHandlerI(ABC):
     @abstractmethod
     def handle(cls, request: Request, exception: Exception) -> dict:
         """Handle the exception and return a response"""
-

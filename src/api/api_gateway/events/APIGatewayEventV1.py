@@ -14,8 +14,7 @@ class APIGatewayEventV1(APIGatewayRequestI, APIGatewayEventBase):
         return self.context
 
     def get_stage(self) -> str:
-        return self.get_body().get('requestContext', {}).get('stage', '')
+        return self.get_body().get("requestContext", {}).get("stage", "")
 
     def get_version(self) -> str:
         return self.version
-

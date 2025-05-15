@@ -20,4 +20,4 @@ class APIGatewayEventBase(EventI):
 
     @classmethod
     def is_valid(cls, event: dict) -> bool:
-        return event.get('resource') == "/{proxy+}" and bool(event.get('httpMethod'))
+        return event.get("resource") == "/{proxy+}" and bool(event.get("httpMethod"))

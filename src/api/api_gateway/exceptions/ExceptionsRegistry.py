@@ -8,7 +8,7 @@ from api.api_gateway.interfaces.ExceptionHandlerI import ExceptionHandlerI
 
 class ExceptionRegistry:
     @staticmethod
-    def exceptions_handlers() ->list[Type[ExceptionHandlerI]]:
+    def exceptions_handlers() -> list[Type[ExceptionHandlerI]]:
         # Add custom exceptions and relative handlers here
         return [
             ExceptionHandler,

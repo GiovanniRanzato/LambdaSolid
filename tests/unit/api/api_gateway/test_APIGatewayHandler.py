@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from api.api_gateway.APIGatewayHandler import APIGatewayHandler
 from api.api_gateway.interfaces.APIGatewayRequestI import APIGatewayRequestI
 
+
 class TestApiGatewayHandler:
     @pytest.fixture
     def handler(self):
@@ -37,5 +38,3 @@ class TestApiGatewayHandler:
 
         mangum_mock.assert_called_once()
         app_mock.assert_called_once_with(event.get_body(), event.get_context())
-
-

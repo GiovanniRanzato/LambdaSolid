@@ -7,10 +7,12 @@ from starlette.responses import JSONResponse
 from api.api_gateway.exceptions.handlers.ExceptionHandler import ExceptionHandler
 from api.api_gateway.interfaces.ExceptionHandlerI import ExceptionHandlerI
 
+
 class TestExceptionHandlerBase:
     @pytest.fixture
     def handler(self) -> ExceptionHandler:
         return ExceptionHandler()
+
     @pytest.fixture
     def request_obj(self):
         return MagicMock()
@@ -34,7 +36,5 @@ class TestExceptionHandlerBase:
 
         assert isinstance(result, JSONResponse)
         assert result.status_code == 500
-        assert response_body['detail'] is not None
+        assert response_body["detail"] is not None
         assert logging_error.call_count == 2
-
-

@@ -8,10 +8,12 @@ from starlette.responses import JSONResponse
 from api.api_gateway.exceptions.handlers.ValidationExceptionHandler import ValidationExceptionHandler
 from api.api_gateway.interfaces.ExceptionHandlerI import ExceptionHandlerI
 
+
 class TestValidationExceptionHandler:
     @pytest.fixture
     def handler(self) -> ValidationExceptionHandler:
         return ValidationExceptionHandler()
+
     @pytest.fixture
     def request_obj(self):
         return MagicMock()
@@ -38,8 +40,6 @@ class TestValidationExceptionHandler:
 
         assert isinstance(result, JSONResponse)
         assert result.status_code == 422
-        assert response_body['detail'] == exception.errors()
-        assert response_body['body'] == exception.body
+        assert response_body["detail"] == exception.errors()
+        assert response_body["body"] == exception.body
         logging_warning.assert_called_once()
-
-

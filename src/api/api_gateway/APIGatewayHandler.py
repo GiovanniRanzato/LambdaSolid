@@ -9,16 +9,14 @@ from infrastructure.interfaces.HandlerI import HandlerI
 
 
 class APIGatewayHandler(HandlerI):
-    def __init__(self,  standalone = False):
+    def __init__(self, standalone=False):
         self.standalone = standalone
-        self.app_name = 'LambdaSolid'
-        self.doc_url = '/docs'
-        self.redoc_url = '/redoc'
-        self.cors_allow_origins = '*'
-        self.cors_allow_methods='GET,POST,PUT,DELETE,OPTIONS'
-        self.cors_allow_headers=''
-
-
+        self.app_name = "LambdaSolid"
+        self.doc_url = "/docs"
+        self.redoc_url = "/redoc"
+        self.cors_allow_origins = "*"
+        self.cors_allow_methods = "GET,POST,PUT,DELETE,OPTIONS"
+        self.cors_allow_headers = ""
 
     def handle(self, event: APIGatewayRequestI):
         print(f"Handling API Gateway event: {event}")
@@ -28,7 +26,7 @@ class APIGatewayHandler(HandlerI):
             root_path="/{}/".format(event.get_stage()),
             docs_url=self.doc_url,
             openapi_url="/openapi.json",
-            redoc_url=self.redoc_url
+            redoc_url=self.redoc_url,
         )
         self._set_exceptions_handlers(fast_api)
         self._set_middlewares(fast_api)
@@ -44,7 +42,7 @@ class APIGatewayHandler(HandlerI):
     @staticmethod
     def _set_routes(fast_api):
         for router in routers:
-            fast_api.include_router(router.get('router'), prefix=router.get('prefix'))
+            fast_api.include_router(router.get("router"), prefix=router.get("prefix"))
 
     @staticmethod
     def _set_exceptions_handlers(fast_api):

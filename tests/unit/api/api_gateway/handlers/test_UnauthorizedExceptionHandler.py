@@ -10,10 +10,12 @@ from api.api_gateway.exceptions.handlers.ValidationExceptionHandler import Valid
 from api.api_gateway.exceptions.models.UnauthorizedException import UnauthorizedException
 from api.api_gateway.interfaces.ExceptionHandlerI import ExceptionHandlerI
 
+
 class TestUnauthorizedExceptionHandler:
     @pytest.fixture
     def handler(self) -> UnauthorizedExceptionHandler:
         return UnauthorizedExceptionHandler()
+
     @pytest.fixture
     def request_obj(self):
         return MagicMock()
@@ -38,7 +40,5 @@ class TestUnauthorizedExceptionHandler:
 
         assert isinstance(result, JSONResponse)
         assert result.status_code == 401
-        assert response_body['detail'] is not None
+        assert response_body["detail"] is not None
         logging_warning.assert_called_once()
-
-
