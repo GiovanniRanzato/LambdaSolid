@@ -6,10 +6,10 @@ from starlette import status
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
-from api.api_gateway.exceptions.handlers.ExceptionHandlerBase import ExceptionHandlerBase
+from api.api_gateway.interfaces.ExceptionHandlerI import ExceptionHandlerI
 
 
-class ExceptionHandler(ExceptionHandlerBase):
+class ExceptionHandler(ExceptionHandlerI):
     @staticmethod
     def handled_exception() -> Type[Exception]:
         return Exception
