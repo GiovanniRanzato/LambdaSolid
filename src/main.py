@@ -16,7 +16,7 @@ def lambda_handler(
         container.wire(modules=["src.main"])
 
         app = App()
-        app.run(event, context)
+        return app.run(event, context)
 
     except Exception as e:
         logging.error("Error in lambda_handler: %s", str(e))
