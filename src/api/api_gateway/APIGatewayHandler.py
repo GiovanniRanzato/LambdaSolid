@@ -1,3 +1,4 @@
+from dependency_injector.wiring import Provide, inject
 from fastapi import FastAPI
 from mangum import Mangum
 from starlette.middleware.cors import CORSMiddleware
@@ -5,13 +6,17 @@ from starlette.middleware.cors import CORSMiddleware
 from api.api_gateway.exceptions.ExceptionsRegistry import ExceptionRegistry
 from api.api_gateway.routes.routes import routers
 from api.api_gateway.interfaces.APIGatewayRequestI import APIGatewayRequestI
+
+from infrastructure.containers import Container
+from infrastructure.interfaces.ConfigI import ConfigI
 from infrastructure.interfaces.HandlerI import HandlerI
 
 
 class APIGatewayHandler(HandlerI):
-    def __init__(self, standalone=False):
+    @inject
+    def __init__(self, config: ConfigI = Provide[Container.config], standalone=False):
         self.standalone = standalone
-        self.app_name = "LambdaSolid"
+        self.app_name = config.get("APP_NAME") # "LambdaSolid"
         self.doc_url = "/docs"
         self.redoc_url = "/redoc"
         self.cors_allow_origins = "*"

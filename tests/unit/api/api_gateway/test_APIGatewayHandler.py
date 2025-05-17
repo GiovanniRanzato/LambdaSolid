@@ -4,12 +4,19 @@ import pytest
 from fastapi import FastAPI
 from api.api_gateway.APIGatewayHandler import APIGatewayHandler
 from api.api_gateway.interfaces.APIGatewayRequestI import APIGatewayRequestI
+from infrastructure.config.Config import Config
 
 
 class TestApiGatewayHandler:
     @pytest.fixture
-    def handler(self):
-        return APIGatewayHandler()
+    def config(self):
+        config = MagicMock(spec=Config)
+        config.get.return_value = "value"
+        return config
+
+    @pytest.fixture
+    def handler(self, config):
+        return APIGatewayHandler(config=config)
 
     @pytest.fixture
     def event(self):
@@ -23,8 +30,8 @@ class TestApiGatewayHandler:
     def test_init(self, handler):
         assert isinstance(handler, APIGatewayHandler)
 
-    def test_handle_standalone_returns_fastapi_app(self, handler, event):
-        handler = APIGatewayHandler(standalone=True)
+    def test_handle_standalone_returns_fastapi_app(self, handler, config, event):
+        handler = APIGatewayHandler(config=config, standalone=True)
         app = handler.handle(event)
 
         assert isinstance(app, FastAPI)

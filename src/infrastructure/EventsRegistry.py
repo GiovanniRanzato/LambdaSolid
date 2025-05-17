@@ -16,5 +16,9 @@ class EventsRegistry:
     def get_events_registry(self) -> {str, Type[EventI]}:
         return self._events_registry
 
-    def get_handlers_registry(self) -> {str, Type[HandlerI]}:
-        return self._handlers_registry
+    def resolve_handler_class(self, event: EventI) -> Type[HandlerI]:
+        event_type = event.get_event_type()
+        handler_class = self._handlers_registry.get(event_type)
+        if handler_class is None:
+            raise ValueError(f"No handler registered for event type: {event_type}")
+        return handler_class
