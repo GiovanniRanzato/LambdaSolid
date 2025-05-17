@@ -35,8 +35,6 @@ class TestEventRegistry:
         assert event_registry._events_registry == {}
         assert event_registry._handlers_registry == {}
 
-
-
     def test_register_event(self, event_registry):
         event_type = Type[EventI]
         handler_type = Type[HandlerI]

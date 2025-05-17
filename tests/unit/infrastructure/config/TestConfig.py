@@ -8,7 +8,6 @@ from infrastructure.config.Config import Config
 
 
 class TestConfig:
-
     @patch("infrastructure.config.Config.SecretManager")
     def test_loads_env_and_secrets(self, mock_secret_manager_class):
         # Arrange
@@ -19,7 +18,7 @@ class TestConfig:
         mock_secret_manager_instance = MagicMock()
         mock_secret_manager_instance.get_secrets.return_value = {
             "DATABASE_URL": "postgres://user:pass@host/db",
-            "ENV": "secret"  # Override test value
+            "ENV": "secret",  # Override test value
         }
         mock_secret_manager_class.return_value = mock_secret_manager_instance
 
@@ -35,9 +34,7 @@ class TestConfig:
         assert config.init is True
 
         mock_secret_manager_class.assert_called_once_with(
-            secret_name="my-secret",
-            secret_region="eu-west-1",
-            secret_endpoint=None
+            secret_name="my-secret", secret_region="eu-west-1", secret_endpoint=None
         )
 
     @patch("infrastructure.config.Config.SecretManager")
@@ -86,7 +83,6 @@ class TestConfig:
 
         os_environ_items.assert_called_once()
 
-
     @pytest.fixture(autouse=True)
     def reset_config_class_state(self):
         # Run before each test
@@ -96,5 +92,3 @@ class TestConfig:
         # Run after each test
         Config.config = {}
         Config.init = False
-
-

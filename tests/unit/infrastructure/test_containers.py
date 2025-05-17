@@ -17,7 +17,6 @@ class TestContainers:
     def event_factory(self, container) -> EventFactory:
         return container.event_factory()
 
-
     def test_event_registry(self, container, registry):
         assert isinstance(registry, EventsRegistry)
 

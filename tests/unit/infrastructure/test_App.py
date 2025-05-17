@@ -66,4 +66,3 @@ class TestApp:
         factory_mock.assert_called_once()  # controlla che la factory sia stata chiamata
         handler_instance.handle.assert_called_once_with(event=parsed_event)
         assert result == "response"
-

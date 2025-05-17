@@ -16,7 +16,7 @@ class APIGatewayHandler(HandlerI):
     @inject
     def __init__(self, config: ConfigI = Provide[Container.config], standalone=False):
         self.standalone = standalone
-        self.app_name = config.get("APP_NAME") # "LambdaSolid"
+        self.app_name = config.get("APP_NAME")  # "LambdaSolid"
         self.doc_url = "/docs"
         self.redoc_url = "/redoc"
         self.cors_allow_origins = "*"
