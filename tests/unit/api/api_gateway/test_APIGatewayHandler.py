@@ -11,7 +11,14 @@ class TestApiGatewayHandler:
     @pytest.fixture
     def config(self):
         config = MagicMock(spec=Config)
-        config.get.return_value = "value"
+        config.get.side_effect = [
+            "LambdaSolid",  # APP_NAME
+            "/docs",  # FASTAPI_DOCS_URL
+            "/redoc",  # FASTAPI_REDOC_URL
+            "*",  # CORS_ALLOW_ORIGINS
+            "GET,POST,PUT,DELETE,OPTIONS",  # CORS_ALLOW_METHODS
+            "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",  # CORS_ALLOW_HEADERS
+        ]
         return config
 
     @pytest.fixture
@@ -30,7 +37,7 @@ class TestApiGatewayHandler:
     def test_init(self, handler):
         assert isinstance(handler, APIGatewayHandler)
 
-    def test_handle_standalone_returns_fastapi_app(self, handler, config, event):
+    def test_handle_standalone_returns_fastapi_app(self, config, event):
         handler = APIGatewayHandler(config=config, standalone=True)
         app = handler.handle(event)
 
