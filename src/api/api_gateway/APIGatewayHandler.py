@@ -17,11 +17,11 @@ class APIGatewayHandler(HandlerI):
     def __init__(self, config: ConfigI = Provide[Container.config], standalone=False):
         self.standalone = standalone
         self.app_name = config.get("APP_NAME")  # "LambdaSolid"
-        self.doc_url = config.get("FASTAPI_DOCS_URL") #"/docs"
-        self.redoc_url = config.get("FASTAPI_REDOC_URL") # "/redoc"
-        self.cors_allow_origins = config.get("CORS_ALLOW_ORIGINS") # "*"
-        self.cors_allow_methods = config.get("CORS_ALLOW_METHODS") # "GET,POST,PUT,DELETE,OPTIONS"
-        self.cors_allow_headers = config.get("CORS_ALLOW_HEADERS") # ""
+        self.doc_url = config.get("FASTAPI_DOCS_URL")  # "/docs"
+        self.redoc_url = config.get("FASTAPI_REDOC_URL")  # "/redoc"
+        self.cors_allow_origins = config.get("CORS_ALLOW_ORIGINS")  # "*"
+        self.cors_allow_methods = config.get("CORS_ALLOW_METHODS")  # "GET,POST,PUT,DELETE,OPTIONS"
+        self.cors_allow_headers = config.get("CORS_ALLOW_HEADERS")  # ""
 
     def handle(self, event: APIGatewayRequestI):
         print(f"Handling API Gateway event: {event}")
