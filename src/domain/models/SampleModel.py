@@ -3,6 +3,7 @@ from datetime import datetime
 
 from repositories.db.DBObjectBase import DBObjectBase
 
+
 @dataclass
 class SampleModel(DBObjectBase):
     sample_id: str = None

@@ -14,29 +14,35 @@ class DummyFlatModel(DBObjectBase):
     name: str
     datetime: datetime
 
+
 @dataclass
 class DummyNestedModel(DBObjectBase):
     id: str
     nested_prop: DummyFlatModel
+
 
 @dataclass
 class DummyNestedListModel(DBObjectBase):
     id: str
     nested_prop: list[DummyFlatModel]
 
+
 @dataclass
 class DummyNestedDict(DBObjectBase):
     id: str
     nested_prop: dict
+
 
 @dataclass
 class DummyNestedListStr(DBObjectBase):
     id: str
     nested_prop: list[str]
 
+
 @dataclass
 class DummyInvalidModel:
     id: str
+
 
 @dataclass
 class DummyNestedInvalidModel(DBObjectBase):
@@ -79,90 +85,82 @@ class TestDynamoDBSerializer:
 
     @pytest.fixture
     def flat_model_dict(self, flat_model):
-        return {
-            'id': flat_model.id,
-            'name': flat_model.name,
-            'datetime': flat_model.datetime.isoformat()
-        }
+        return {"id": flat_model.id, "name": flat_model.name, "datetime": flat_model.datetime.isoformat()}
 
     @pytest.fixture
     def nested_model_dict(self, nested_model):
         return {
-            'id': nested_model.id,
-            'nested_prop': {
-                'id': nested_model.nested_prop.id,
-                'name': nested_model.nested_prop.name,
-                'datetime': nested_model.nested_prop.datetime
-            }
+            "id": nested_model.id,
+            "nested_prop": {
+                "id": nested_model.nested_prop.id,
+                "name": nested_model.nested_prop.name,
+                "datetime": nested_model.nested_prop.datetime,
+            },
         }
 
     @pytest.fixture
     def nested_dict_dict(self, nested_dict):
         return {
-            'id': nested_dict.id,
-            'nested_prop': {
-                'id': nested_dict.nested_prop['id'],
-                'name': nested_dict.nested_prop['name'],
-                'datetime': nested_dict.nested_prop['datetime'].isoformat()
-            }
+            "id": nested_dict.id,
+            "nested_prop": {
+                "id": nested_dict.nested_prop["id"],
+                "name": nested_dict.nested_prop["name"],
+                "datetime": nested_dict.nested_prop["datetime"].isoformat(),
+            },
         }
 
     @pytest.fixture
     def nested_list_model_dict(self, nested_list_model):
         return {
-            'id': nested_list_model.id,
-            'nested_prop': [
+            "id": nested_list_model.id,
+            "nested_prop": [
                 {
-                    'id': nested_list_model.nested_prop[0].id,
-                    'name': nested_list_model.nested_prop[0].name,
-                    'datetime': nested_list_model.nested_prop[0].datetime.isoformat()
+                    "id": nested_list_model.nested_prop[0].id,
+                    "name": nested_list_model.nested_prop[0].name,
+                    "datetime": nested_list_model.nested_prop[0].datetime.isoformat(),
                 }
-            ]
+            ],
         }
 
     @pytest.fixture
     def nested_list_str_dict(self, nested_list_str):
-        return {
-            'id': nested_list_str.id,
-            'nested_prop': nested_list_str.nested_prop
-        }
+        return {"id": nested_list_str.id, "nested_prop": nested_list_str.nested_prop}
 
     def test_flat_model_serialization(self, serializer, flat_model):
         serialized = serializer.to_db(flat_model)
         assert isinstance(serialized, dict)
-        assert serialized['id'] == flat_model.id
-        assert serialized['name'] == flat_model.name
-
+        assert serialized["id"] == flat_model.id
+        assert serialized["name"] == flat_model.name
 
     def test_nested_model_serialization(self, serializer, nested_model):
         serialized = serializer.to_db(nested_model)
         assert isinstance(serialized, dict)
-        assert serialized['id'] == nested_model.id
-        assert serialized['nested_prop']['id'] == nested_model.nested_prop.id
-        assert serialized['nested_prop']['name'] == nested_model.nested_prop.name
-        assert serialized['nested_prop']['datetime'] == nested_model.nested_prop.datetime.isoformat()
+        assert serialized["id"] == nested_model.id
+        assert serialized["nested_prop"]["id"] == nested_model.nested_prop.id
+        assert serialized["nested_prop"]["name"] == nested_model.nested_prop.name
+        assert serialized["nested_prop"]["datetime"] == nested_model.nested_prop.datetime.isoformat()
 
     def test_nested_list_model_serialization(self, serializer, nested_list_model):
         serialized = serializer.to_db(nested_list_model)
         assert isinstance(serialized, dict)
-        assert serialized['id'] == nested_list_model.id
-        assert serialized['nested_prop'][0]['id'] == nested_list_model.nested_prop[0].id
-        assert serialized['nested_prop'][0]['name'] == nested_list_model.nested_prop[0].name
-        assert serialized['nested_prop'][0]['datetime'] == nested_list_model.nested_prop[0].datetime.isoformat()
+        assert serialized["id"] == nested_list_model.id
+        assert serialized["nested_prop"][0]["id"] == nested_list_model.nested_prop[0].id
+        assert serialized["nested_prop"][0]["name"] == nested_list_model.nested_prop[0].name
+        assert serialized["nested_prop"][0]["datetime"] == nested_list_model.nested_prop[0].datetime.isoformat()
 
     def test_nested_dict_serialization(self, serializer, nested_dict):
         serialized = serializer.to_db(nested_dict)
         assert isinstance(serialized, dict)
-        assert serialized['id'] == nested_dict.id
-        assert serialized['nested_prop']['id'] == nested_dict.nested_prop['id']
-        assert serialized['nested_prop']['name'] == nested_dict.nested_prop['name']
+        assert serialized["id"] == nested_dict.id
+        assert serialized["nested_prop"]["id"] == nested_dict.nested_prop["id"]
+        assert serialized["nested_prop"]["name"] == nested_dict.nested_prop["name"]
 
     def test_nested_list_str_serialization(self, serializer, nested_list_str):
         serialized = serializer.to_db(nested_list_str)
         assert isinstance(serialized, dict)
-        assert serialized['id'] == nested_list_str.id
-        assert serialized['nested_prop'][0] == nested_list_str.nested_prop[0]
-        assert serialized['nested_prop'][1] == nested_list_str.nested_prop[1]
+        assert serialized["id"] == nested_list_str.id
+        assert serialized["nested_prop"][0] == nested_list_str.nested_prop[0]
+        assert serialized["nested_prop"][1] == nested_list_str.nested_prop[1]
 
     def test_flat_model_deserialization(self, serializer, flat_model_dict, flat_model):
         deserialized = serializer.from_db(flat_model_dict, DummyFlatModel)
@@ -193,7 +191,3 @@ class TestDynamoDBSerializer:
         with pytest.raises(TypeError):
             test = serializer.to_db(nested_invalid_model)
             assert isinstance(test, dict)
-
-
-
-

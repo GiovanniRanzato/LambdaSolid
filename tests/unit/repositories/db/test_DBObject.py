@@ -21,8 +21,5 @@ class TestDBObject:
         assert isinstance(db_object, DBObjectBase)
 
     def test_model_dump(self, db_object):
-        expected_dict = {
-            "id": "123",
-            "name": "Test"
-        }
+        expected_dict = {"id": "123", "name": "Test"}
         assert db_object.model_dump() == expected_dict

@@ -11,7 +11,6 @@ from repositories.interfaces.DBTableI import DBTableI
 
 class DynamoDBTableSample(DynamoDB, DBTableI):
     def __init__(self, config: ConfigI, serializer: DBSerializerI):
-
         super().__init__(config)
         self.table = self.resource.Table(config.get("DYNAMODB_SAMPLE_TABLE"))
         self.pk = config.get("DYNAMODB_SAMPLE_TABLE_PK")
@@ -24,7 +23,7 @@ class DynamoDBTableSample(DynamoDB, DBTableI):
         return True
 
     def get(self, pk: str) -> DBObjectI | None:
-        dynamo_dict = self.table.get_item(Key={self.pk: pk}).get('Item')
+        dynamo_dict = self.table.get_item(Key={self.pk: pk}).get("Item")
         if not dynamo_dict:
             return None
         return self.serializer.from_db(dynamo_dict, obj_class=self.obj_class)

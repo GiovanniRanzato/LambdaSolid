@@ -31,7 +31,7 @@ class TestIntegrationSampleDynamoDBTable:
             sample_id=uuid.uuid4().hex,
             name="Test Sample",
             created_at=datetime.datetime.now(),
-            updated_at=datetime.datetime.now()
+            updated_at=datetime.datetime.now(),
         )
 
     def test_init(self, sample_db_table):
@@ -41,10 +41,9 @@ class TestIntegrationSampleDynamoDBTable:
         result = sample_db_table.save(sample_model)
         assert result is True
 
-        retrieved_model = sample_db_table.table.get_item(
-            Key={sample_db_table.pk: sample_model.sample_id})
+        retrieved_model = sample_db_table.table.get_item(Key={sample_db_table.pk: sample_model.sample_id})
 
-        assert retrieved_model['Item']['name'] == sample_model.name
+        assert retrieved_model["Item"]["name"] == sample_model.name
 
     def test_nested_db_object(self, sample_db_table, sample_model):
         @dataclass
@@ -53,6 +52,7 @@ class TestIntegrationSampleDynamoDBTable:
 
             def model_dump(self) -> dict:
                 return self.__dict__
+
         @dataclass
         class DummySampleModel:
             sample_id: str
@@ -62,18 +62,14 @@ class TestIntegrationSampleDynamoDBTable:
                 return self.__dict__
 
         nested_object = DummyNestedModel(prop="nested_value")
-        sample_model = DummySampleModel(
-            sample_id=uuid.uuid4().hex,
-            nested_prop=nested_object
-        )
+        sample_model = DummySampleModel(sample_id=uuid.uuid4().hex, nested_prop=nested_object)
 
         result = sample_db_table.save(sample_model)
         assert result is True
 
-        retrieved_dict = sample_db_table.table.get_item(
-            Key={sample_db_table.pk: sample_model.sample_id})
+        retrieved_dict = sample_db_table.table.get_item(Key={sample_db_table.pk: sample_model.sample_id})
 
-        assert retrieved_dict['Item']['nested_prop']['prop'] == nested_object.prop
+        assert retrieved_dict["Item"]["nested_prop"]["prop"] == nested_object.prop
         sample_db_table.obj_class = DummySampleModel
         retrieved_object = sample_db_table.get(sample_model.sample_id)
 

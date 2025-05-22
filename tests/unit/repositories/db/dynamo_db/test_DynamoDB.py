@@ -12,7 +12,7 @@ class TestDynamoDB:
         config = MagicMock(spec=ConfigI)
         config.get.side_effect = lambda key: {
             "DYNAMODB_REGION": "eu-west-1",
-            "LOCALSTACK_ENDPOINT_URL": "http://localhost:4566"
+            "LOCALSTACK_ENDPOINT_URL": "http://localhost:4566",
         }.get(key, None)
         return config
 
