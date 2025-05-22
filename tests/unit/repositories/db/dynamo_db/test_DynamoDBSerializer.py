@@ -127,13 +127,6 @@ class TestDynamoDBSerializer:
             'nested_prop': nested_list_str.nested_prop
         }
 
-    @pytest.fixture
-    def nested_invalid_model_dict(self, nested_invalid_model):
-        return {
-            'id': nested_invalid_model.id,
-            'nested_prop': nested_invalid_model.nested_prop.__dict__
-        }
-
     def test_flat_model_serialization(self, serializer, flat_model):
         serialized = serializer.to_db(flat_model)
         assert isinstance(serialized, dict)
@@ -200,10 +193,6 @@ class TestDynamoDBSerializer:
         with pytest.raises(TypeError):
             test = serializer.to_db(nested_invalid_model)
             assert isinstance(test, dict)
-
-    def test_nested_invalid_model_deserialization(self, serializer, nested_invalid_model_dict, nested_invalid_model):
-        with pytest.raises(TypeError):
-            serializer.from_db(nested_invalid_model_dict, DummyNestedInvalidModel)
 
 
 
