@@ -19,7 +19,7 @@ class Config(ConfigI):
             secret_manager = SecretManager(
                 secret_name=self.config["SECRETS_NAME"],
                 secret_region=self.config["SECRETS_REGION"],
-                secret_endpoint=self.config.get("SECRETS_ENDPOINT", None),
+                secret_endpoint=self.config.get("LOCALSTACK_ENDPOINT_URL", None),
             )
             secret = secret_manager.get_secrets()
             self.config.update(secret)
