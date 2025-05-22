@@ -14,6 +14,7 @@ class TestConfig:
         os.environ["ENV"] = "test"
         os.environ["SECRETS_NAME"] = "my-secret"
         os.environ["SECRETS_REGION"] = "eu-west-1"
+        os.environ["LOCALSTACK_ENDPOINT_URL"] = "http://localhost:4566"
 
         mock_secret_manager_instance = MagicMock()
         mock_secret_manager_instance.get_secrets.return_value = {
@@ -34,18 +35,16 @@ class TestConfig:
         assert config.init is True
 
         mock_secret_manager_class.assert_called_once_with(
-            secret_name="my-secret", secret_region="eu-west-1", secret_endpoint=None
+            secret_name="my-secret", secret_region="eu-west-1", secret_endpoint="http://localhost:4566"
         )
 
     @patch("infrastructure.config.Config.SecretManager")
-    def test_uses_only_env_when_no_secrets(self, mock_secret_manager_class):
+    def test_uses_only_env_when_no_secrets(self, mock_secret_manager_class, mocker):
         # Arrange
         os.environ["ENV"] = "dev"
-        os.environ.pop("SECRETS_NAME", None)
-        os.environ.pop("SECRETS_REGION", None)
 
         config = Config()
-
+        mocker.patch("os.environ.items", return_value=[("ENV", "dev")])
         # Act
         env = config.get("ENV")
 
