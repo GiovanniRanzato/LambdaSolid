@@ -1,15 +1,21 @@
 from abc import ABC, abstractmethod
+
 from repositories.interfaces.DBObjectI import DBObjectI
 
 
 class DBTableI(ABC):
-    def __init__(self, db_config: dict):
-        self.db_config = db_config
+    @abstractmethod
+    def create(self, db_object: DBObjectI) -> DBObjectI:
+        """Creates a new object in the database"""
 
     @abstractmethod
-    def save(self, db_object: DBObjectI) -> bool:
-        """Saves the object to the database"""
+    def update(self, db_object: DBObjectI) -> DBObjectI:
+        """Updates an existing object in the database"""
 
     @abstractmethod
     def get(self, pk: str) -> DBObjectI | None:
         """Retrieves the object from the database using the partition key and value"""
+
+    @abstractmethod
+    def delete(self, pk: str) -> bool:
+        """Deletes the object from the database using the partition key and value"""

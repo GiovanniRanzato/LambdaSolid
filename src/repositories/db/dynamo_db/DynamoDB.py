@@ -8,3 +8,6 @@ class DynamoDB:
         self.resource = boto3.resource(
             "dynamodb", region_name=config.get("DYNAMODB_REGION"), endpoint_url=config.get("LOCALSTACK_ENDPOINT_URL")
         )
+        self.client = boto3.client(
+            "dynamodb", region_name=config.get("DYNAMODB_REGION"), endpoint_url=config.get("LOCALSTACK_ENDPOINT_URL")
+        )
