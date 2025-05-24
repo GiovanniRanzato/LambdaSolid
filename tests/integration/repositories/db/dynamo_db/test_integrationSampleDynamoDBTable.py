@@ -5,7 +5,7 @@ from dataclasses import dataclass
 import pytest
 from dependency_injector.wiring import Provide, inject
 
-from domain.models.SampleModel import SampleModel
+from domain.models.ModelSample import ModelSample
 from infrastructure.containers import Container
 from repositories.db.dynamo_db.DynamoDBTableSample import DynamoDBTableSample
 from repositories.interfaces.DBObjectI import DBObjectI
@@ -22,31 +22,31 @@ class TestIntegrationSampleDynamoDBTable:
 
     @pytest.fixture
     @inject
-    def sample_db_table(self, container: Container, sample_db_table=Provide[Container.sample_db_table]):
-        return sample_db_table
+    def db_table_sample(self, container: Container, db_table_sample=Provide[Container.db_table_sample]):
+        return db_table_sample
 
     @pytest.fixture
     def sample_model(self):
-        return SampleModel(
+        return ModelSample(
             sample_id=uuid.uuid4().hex,
             name="Test Sample",
             created_at=datetime.datetime.now(),
             updated_at=datetime.datetime.now(),
         )
 
-    def test_init(self, sample_db_table):
-        assert isinstance(sample_db_table, DynamoDBTableSample)
+    def test_init(self, db_table_sample):
+        assert isinstance(db_table_sample, DynamoDBTableSample)
 
-    def test_create(self, sample_db_table, sample_model):
+    def test_create(self, db_table_sample, sample_model):
         sample_model.sample_id = ""
-        result = sample_db_table.create(sample_model)
+        result = db_table_sample.create(sample_model)
         assert result.sample_id is not None
 
-        retrieved_model = sample_db_table.table.get_item(Key={sample_db_table.pk: sample_model.sample_id})
+        retrieved_model = db_table_sample.table.get_item(Key={db_table_sample.pk: sample_model.sample_id})
 
         assert retrieved_model["Item"]["name"] == sample_model.name
 
-    def test_nested_db_object(self, sample_db_table, sample_model):
+    def test_nested_db_object(self, db_table_sample, sample_model):
         @dataclass
         class DummyNestedModel(DBObjectI):
             prop: str
@@ -66,26 +66,26 @@ class TestIntegrationSampleDynamoDBTable:
         sample_model = DummySampleModel(sample_id=uuid.uuid4().hex, nested_prop=nested_object)
 
         sample_model.sample_id = ""
-        result = sample_db_table.create(sample_model)
+        result = db_table_sample.create(sample_model)
         assert result.sample_id is not None
 
-        retrieved_dict = sample_db_table.table.get_item(Key={sample_db_table.pk: sample_model.sample_id})
+        retrieved_dict = db_table_sample.table.get_item(Key={db_table_sample.pk: sample_model.sample_id})
 
         assert retrieved_dict["Item"]["nested_prop"]["prop"] == nested_object.prop
-        sample_db_table.obj_class = DummySampleModel
-        retrieved_object = sample_db_table.get(sample_model.sample_id)
+        db_table_sample.obj_class = DummySampleModel
+        retrieved_object = db_table_sample.get(sample_model.sample_id)
 
         assert retrieved_object.nested_prop.prop == nested_object.prop
         assert isinstance(retrieved_object, DummySampleModel)
         assert isinstance(retrieved_object.nested_prop, DummyNestedModel)
 
-    def test_get_item(self, sample_db_table, sample_model):
-        created_item = sample_db_table.create(sample_model)
+    def test_get_item(self, db_table_sample, sample_model):
+        created_item = db_table_sample.create(sample_model)
 
-        retrieved_model = sample_db_table.get(sample_model.sample_id)
+        retrieved_model = db_table_sample.get(sample_model.sample_id)
 
         assert retrieved_model is not None
-        assert isinstance(retrieved_model, SampleModel)
+        assert isinstance(retrieved_model, ModelSample)
         assert retrieved_model.sample_id == created_item.sample_id
         assert retrieved_model.name == sample_model.name
         assert retrieved_model.name == created_item.name
