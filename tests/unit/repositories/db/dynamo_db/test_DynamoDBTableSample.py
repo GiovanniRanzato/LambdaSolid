@@ -14,7 +14,7 @@ class TestDynamoDBTableSample:
             "DYNAMODB_REGION": "eu-west-1",
             "LOCALSTACK_ENDPOINT_URL": "http://localhost:4566",
             "DYNAMODB_SAMPLE_TABLE": "test_table_sample",
-            "DYNAMODB_SAMPLE_TABLE_PK": "sample_id"
+            "DYNAMODB_SAMPLE_TABLE_PK": "sample_id",
         }.get(key, None)
         return config
 
@@ -25,6 +25,7 @@ class TestDynamoDBTableSample:
     @pytest.fixture
     def dynamo_db_table_sample(self, config, serializer):
         from repositories.db.dynamo_db.DynamoDBTableSample import DynamoDBTableSample
+
         return DynamoDBTableSample(config=config, serializer=serializer)
 
     def test_init(self, dynamo_db_table_sample, config):

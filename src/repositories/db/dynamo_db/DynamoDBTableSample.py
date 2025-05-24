@@ -11,6 +11,5 @@ class DynamoDBTableSample(DynamoDBTableBase):
             pk=config.get("DYNAMODB_SAMPLE_TABLE_PK"),
             obj_class=SampleModel,
             serializer=serializer,
-            config=config
+            config=config,
         )
-

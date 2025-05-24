@@ -10,7 +10,9 @@ from repositories.interfaces.DBTableI import DBTableI
 
 
 class DynamoDBTableBase(DynamoDB, DBTableI):
-    def __init__(self, table_name: str, pk: str, obj_class: Type[DBObjectI], serializer: DBSerializerI, config: ConfigI):
+    def __init__(
+        self, table_name: str, pk: str, obj_class: Type[DBObjectI], serializer: DBSerializerI, config: ConfigI
+    ):
         super().__init__(config)
 
         self.table = self.resource.Table(table_name)
@@ -41,5 +43,3 @@ class DynamoDBTableBase(DynamoDB, DBTableI):
             Key={self.pk: {"S": pk}},
         )
         return True
-
-

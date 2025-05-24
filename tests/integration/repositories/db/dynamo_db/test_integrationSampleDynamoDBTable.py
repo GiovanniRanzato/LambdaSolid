@@ -38,7 +38,7 @@ class TestIntegrationSampleDynamoDBTable:
         assert isinstance(sample_db_table, DynamoDBTableSample)
 
     def test_create(self, sample_db_table, sample_model):
-        sample_model.sample_id = ''
+        sample_model.sample_id = ""
         result = sample_db_table.create(sample_model)
         assert result.sample_id is not None
 
@@ -65,7 +65,7 @@ class TestIntegrationSampleDynamoDBTable:
         nested_object = DummyNestedModel(prop="nested_value")
         sample_model = DummySampleModel(sample_id=uuid.uuid4().hex, nested_prop=nested_object)
 
-        sample_model.sample_id = ''
+        sample_model.sample_id = ""
         result = sample_db_table.create(sample_model)
         assert result.sample_id is not None
 
