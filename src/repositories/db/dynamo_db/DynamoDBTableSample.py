@@ -1,4 +1,4 @@
-from domain.models.SampleModel import SampleModel
+from domain.models.ModelSample import ModelSample
 from infrastructure.interfaces.ConfigI import ConfigI
 from repositories.db.dynamo_db.DynamoDBTableBase import DynamoDBTableBase
 from repositories.interfaces.DBSerializerI import DBSerializerI
@@ -9,7 +9,7 @@ class DynamoDBTableSample(DynamoDBTableBase):
         super().__init__(
             table_name=config.get("DYNAMODB_SAMPLE_TABLE"),
             pk=config.get("DYNAMODB_SAMPLE_TABLE_PK"),
-            obj_class=SampleModel,
+            obj_class=ModelSample,
             serializer=serializer,
             config=config,
         )

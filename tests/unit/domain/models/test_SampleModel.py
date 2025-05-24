@@ -2,13 +2,13 @@ import datetime
 import uuid
 
 import pytest
-from domain.models.SampleModel import SampleModel
+from domain.models.ModelSample import ModelSample
 
 
 class TestSampleModel:
     @pytest.fixture
     def sample_model(self):
-        return SampleModel(
+        return ModelSample(
             sample_id=uuid.uuid4().hex,
             name=uuid.uuid4().hex,
             created_at=datetime.datetime.now(),
@@ -16,7 +16,7 @@ class TestSampleModel:
         )
 
     def test_init(self, sample_model):
-        assert isinstance(sample_model, SampleModel)
+        assert isinstance(sample_model, ModelSample)
 
     def test_model_dump(self, sample_model):
         result = sample_model.model_dump()

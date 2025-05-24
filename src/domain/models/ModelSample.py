@@ -5,7 +5,7 @@ from repositories.db.DBObjectBase import DBObjectBase
 
 
 @dataclass
-class SampleModel(DBObjectBase):
+class ModelSample(DBObjectBase):
     sample_id: str = None
     name: str = None
     created_at: datetime = None
