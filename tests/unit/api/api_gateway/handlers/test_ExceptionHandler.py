@@ -26,7 +26,7 @@ class TestExceptionHandlerBase:
         assert isinstance(handler, ExceptionHandler)
 
     def test_handled_exception(self, handler):
-        assert handler.handled_exception() == Exception
+        assert handler.handled_exception() is Exception
 
     def test_handle(self, handler, exception, request_obj, mocker):
         logging_error = mocker.patch("logging.error")

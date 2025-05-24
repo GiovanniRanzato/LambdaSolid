@@ -1,7 +1,6 @@
 from unittest.mock import MagicMock
 
 import pytest
-from dependency_injector import providers
 
 from infrastructure.App import App
 from infrastructure.containers import Container

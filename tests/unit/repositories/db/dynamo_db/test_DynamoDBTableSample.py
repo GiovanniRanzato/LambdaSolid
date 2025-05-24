@@ -3,7 +3,6 @@ from unittest.mock import MagicMock
 import pytest
 
 from repositories.db.dynamo_db.DynamoDBTableSample import DynamoDBTableSample
-from repositories.interfaces.DBTableI import DBTableI
 
 
 class TestDynamoDBTableSample:

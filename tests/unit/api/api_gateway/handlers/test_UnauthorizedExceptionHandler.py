@@ -2,11 +2,9 @@ import json
 from unittest.mock import MagicMock
 
 import pytest
-from fastapi.exceptions import RequestValidationError
 from starlette.responses import JSONResponse
 
 from api.api_gateway.exceptions.handlers.UnauthorizedExceptionHandler import UnauthorizedExceptionHandler
-from api.api_gateway.exceptions.handlers.ValidationExceptionHandler import ValidationExceptionHandler
 from api.api_gateway.exceptions.models.UnauthorizedException import UnauthorizedException
 from api.api_gateway.interfaces.ExceptionHandlerI import ExceptionHandlerI
 

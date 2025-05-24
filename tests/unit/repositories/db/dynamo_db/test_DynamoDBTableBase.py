@@ -1,4 +1,3 @@
-import uuid
 from dataclasses import dataclass
 from unittest.mock import MagicMock
 
@@ -114,4 +113,4 @@ class TestDynamoDBTableBase:
         boto3_client.delete_item.assert_called_once_with(
             TableName=table.name, Key={dynamo_db_table_base.pk: {"S": "12345"}}
         )
-        assert result == True
+        assert result is True
