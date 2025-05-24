@@ -37,9 +37,10 @@ class TestIntegrationSampleDynamoDBTable:
     def test_init(self, sample_db_table):
         assert isinstance(sample_db_table, DynamoDBTableSample)
 
-    def test_save(self, sample_db_table, sample_model):
-        result = sample_db_table.save(sample_model)
-        assert result is True
+    def test_create(self, sample_db_table, sample_model):
+        sample_model.sample_id = ''
+        result = sample_db_table.create(sample_model)
+        assert result.sample_id is not None
 
         retrieved_model = sample_db_table.table.get_item(Key={sample_db_table.pk: sample_model.sample_id})
 
@@ -64,8 +65,9 @@ class TestIntegrationSampleDynamoDBTable:
         nested_object = DummyNestedModel(prop="nested_value")
         sample_model = DummySampleModel(sample_id=uuid.uuid4().hex, nested_prop=nested_object)
 
-        result = sample_db_table.save(sample_model)
-        assert result is True
+        sample_model.sample_id = ''
+        result = sample_db_table.create(sample_model)
+        assert result.sample_id is not None
 
         retrieved_dict = sample_db_table.table.get_item(Key={sample_db_table.pk: sample_model.sample_id})
 
@@ -76,3 +78,14 @@ class TestIntegrationSampleDynamoDBTable:
         assert retrieved_object.nested_prop.prop == nested_object.prop
         assert isinstance(retrieved_object, DummySampleModel)
         assert isinstance(retrieved_object.nested_prop, DummyNestedModel)
+
+    def test_get_item(self, sample_db_table, sample_model):
+        created_item = sample_db_table.create(sample_model)
+
+        retrieved_model = sample_db_table.get(sample_model.sample_id)
+
+        assert retrieved_model is not None
+        assert isinstance(retrieved_model, SampleModel)
+        assert retrieved_model.sample_id == created_item.sample_id
+        assert retrieved_model.name == sample_model.name
+        assert retrieved_model.name == created_item.name
