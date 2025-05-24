@@ -1,4 +1,6 @@
 from unittest.mock import MagicMock
+
+from domain.models.ModelSample import ModelSample
 from domain.services.ServiceSample import ServiceSample
 import pytest
 
@@ -16,20 +18,17 @@ class TestServiceSample:
         return ServiceSample(sample_db_table=sample_db_table)
 
     @pytest.fixture
-    def sample_data_dict(self):
-        return {
-            "sample_id": "123",
-            "name": "Test Sample",
-        }
+    def sample_model(self):
+        sample = MagicMock(spec=ModelSample)
+        return sample
 
     def test_init(self, service):
         assert isinstance(service, ServiceSample)
 
-    def test_create(self, service, sample_db_table, sample_data_dict):
-        created_obj = MagicMock(spec=DBObjectI)
-        sample_db_table.create.return_value = created_obj
+    def test_create(self, service, sample_db_table, sample_model):
+        sample_db_table.create.return_value = sample_model
 
-        result = service.create(sample_data=sample_data_dict)
+        result = service.create(sample=MagicMock(spec=DBObjectI))
 
         sample_db_table.create.assert_called_once()
-        assert result == created_obj
+        assert result == sample_model
