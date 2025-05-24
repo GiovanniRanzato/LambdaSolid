@@ -3,12 +3,13 @@ import uuid
 from dataclasses import dataclass
 
 import pytest
-from dependency_injector.wiring import Provide, inject
 
 from domain.models.ModelSample import ModelSample
+from infrastructure import depends
 from infrastructure.containers import Container
 from repositories.db.dynamo_db.DynamoDBTableSample import DynamoDBTableSample
 from repositories.interfaces.DBObjectI import DBObjectI
+from repositories.interfaces.DBTableI import DBTableI
 
 
 class TestIntegrationSampleDynamoDBTable:
@@ -20,9 +21,8 @@ class TestIntegrationSampleDynamoDBTable:
         container.unwire()
 
     @pytest.fixture
-    @inject
-    def db_table_sample(self, container: Container, db_table_sample=Provide[Container.db_table_sample]):
-        return db_table_sample
+    def db_table_sample(self) -> DBTableI:
+        return depends.get_db_table_sample()
 
     @pytest.fixture
     def sample_model(self):
@@ -39,11 +39,11 @@ class TestIntegrationSampleDynamoDBTable:
     def test_create(self, db_table_sample, sample_model):
         sample_model.sample_id = ""
         result = db_table_sample.create(sample_model)
-        assert result.sample_id is not None
+        assert getattr(result, 'sample_id') is not None
 
-        retrieved_model = db_table_sample.table.get_item(Key={db_table_sample.pk: sample_model.sample_id})
+        retrieved_model = db_table_sample.get(getattr(result, 'sample_id'))
 
-        assert retrieved_model["Item"]["name"] == sample_model.name
+        assert getattr(retrieved_model, 'name') == sample_model.name
 
     def test_nested_db_object(self, db_table_sample, sample_model):
         @dataclass

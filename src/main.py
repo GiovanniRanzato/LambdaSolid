@@ -1,6 +1,5 @@
 # main.py
 import logging
-
 from infrastructure.App import App
 from infrastructure.containers import Container
 
@@ -11,10 +10,8 @@ def lambda_handler(
 ):
     try:
         logging.info("lambda_handler called")
-
         container = Container()
-        container.wire(modules=["src.main"])
-
+        container.wire(modules=Container.wiring_modules)
         app = App()
         return app.run(event, context)
 

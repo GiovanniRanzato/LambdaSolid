@@ -1,19 +1,18 @@
 from dependency_injector import containers, providers
 
-from domain.services.ServiceSample import ServiceSample
-from infrastructure.config.Config import Config
+from infrastructure.depends import get_config, get_events_registry
 from infrastructure.factories.EventFactory import EventFactory
-from infrastructure.EventsRegistry import EventsRegistry
-from repositories.db.dynamo_db.DynamoDBTableSample import DynamoDBTableSample
-from repositories.db.dynamo_db.DynamoDBSerializer import DynamoDBSerializer
-
 
 class Container(containers.DeclarativeContainer):
-    wiring_config = containers.WiringConfiguration(modules=["src.main"])
-    config = providers.Singleton(Config)
-    events_registry = providers.Singleton(EventsRegistry)
+    wiring_modules = [
+        "src.main",
+        "src.api.api_gateway.routes.default.v1.sample",
+    ]
+
+    wiring_config = containers.WiringConfiguration(modules=wiring_modules)
+
+    config = providers.Singleton(lambda: get_config())
+    events_registry = providers.Singleton(lambda: get_events_registry())
     event_factory = providers.Factory(EventFactory, events_registry=events_registry)
 
-    dynamo_db_serializer = providers.Singleton(DynamoDBSerializer)
-    db_table_sample = providers.Singleton(DynamoDBTableSample, config=config, serializer=dynamo_db_serializer)
-    service_sample = providers.Factory(ServiceSample, sample_db_table=db_table_sample)
+

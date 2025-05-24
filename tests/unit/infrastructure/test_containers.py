@@ -59,20 +59,3 @@ class TestContainers:
         assert isinstance(event_factory, EventFactory)
         assert event_factory.events_registry is registry
 
-    def test_dynamo_db_serializer(self, dynamo_db_serializer):
-        assert dynamo_db_serializer is not None
-        assert isinstance(dynamo_db_serializer, DBSerializerI)
-        assert hasattr(dynamo_db_serializer, "to_db")
-        assert hasattr(dynamo_db_serializer, "from_db")
-
-    def test_db_table_sample(self, db_table_sample):
-        assert db_table_sample is not None
-        assert isinstance(db_table_sample, DynamoDBTableSample)
-        assert isinstance(db_table_sample, DBTableI)
-        assert hasattr(db_table_sample, "create")
-        assert hasattr(db_table_sample, "get")
-        assert hasattr(db_table_sample, "update")
-        assert hasattr(db_table_sample, "delete")
-
-    def test_service_sample(self, service_sample):
-        assert isinstance(service_sample, ServiceSample)
