@@ -1,9 +1,12 @@
+from unittest.mock import MagicMock
+
 import pytest
 
 from domain.services.ServiceSample import ServiceSample
 from infrastructure.containers import Container
 from infrastructure.EventsRegistry import EventsRegistry
 from infrastructure.factories.EventFactory import EventFactory
+from infrastructure.interfaces.ConfigI import ConfigI
 from repositories.db.dynamo_db.DynamoDBSerializer import DynamoDBSerializer
 from repositories.db.dynamo_db.DynamoDBTableSample import DynamoDBTableSample
 from repositories.interfaces.DBSerializerI import DBSerializerI
@@ -12,8 +15,12 @@ from repositories.interfaces.DBTableI import DBTableI
 
 class TestContainers:
     @pytest.fixture
-    def container(self) -> Container:
-        return Container()
+    def container(mocker) -> Container:
+        container = Container()
+        # Override config per evitare chiamate reali ad AWS
+        mock_config = MagicMock(spec=ConfigI)
+        container.config.override(mock_config)
+        return container
 
     @pytest.fixture
     def registry(self, container) -> EventsRegistry:
@@ -23,6 +30,29 @@ class TestContainers:
     def event_factory(self, container) -> EventFactory:
         return container.event_factory()
 
+    @pytest.fixture
+    def dynamo_db_serializer(self, container) -> DBSerializerI:
+        return container.dynamo_db_serializer()
+
+    @pytest.fixture
+    def db_table_sample(self, container) -> DBTableI:
+        mock_config = MagicMock(spec=ConfigI)
+        mock_config.get.side_effect = lambda key: {
+            "DYNAMODB_REGION": "eu-west-1",
+            "LOCALSTACK_ENDPOINT_URL": "http://localhost:4566",
+            "DYNAMODB_SAMPLE_TABLE": "test_table_sample",
+            "DYNAMODB_SAMPLE_TABLE_PK": "sample_id",
+        }.get(key)
+
+        container.config.override(mock_config)
+        return container.db_table_sample()
+
+    @pytest.fixture
+    def service_sample(self, container) -> ServiceSample:
+        db_table_sample = MagicMock(spec=DynamoDBTableSample)
+        container.db_table_sample.override(db_table_sample)
+        return container.service_sample()
+
     def test_event_registry(self, container, registry):
         assert isinstance(registry, EventsRegistry)
 
@@ -30,26 +60,20 @@ class TestContainers:
         assert isinstance(event_factory, EventFactory)
         assert event_factory.events_registry is registry
 
-    def test_db_serializer(self, container):
-        db_serializer = container.db_serializer()
-        assert db_serializer is not None
-        assert isinstance(db_serializer, DBSerializerI)
-        assert hasattr(db_serializer, 'to_db')
-        assert hasattr(db_serializer, 'from_db')
+    def test_dynamo_db_serializer(self, dynamo_db_serializer):
+        assert dynamo_db_serializer is not None
+        assert isinstance(dynamo_db_serializer, DBSerializerI)
+        assert hasattr(dynamo_db_serializer, "to_db")
+        assert hasattr(dynamo_db_serializer, "from_db")
 
-    def test_db_table_sample(self, container):
-        db_table_sample = container.db_table_sample()
+    def test_db_table_sample(self, db_table_sample):
         assert db_table_sample is not None
         assert isinstance(db_table_sample, DynamoDBTableSample)
         assert isinstance(db_table_sample, DBTableI)
-        assert hasattr(db_table_sample, 'create')
-        assert hasattr(db_table_sample, 'get')
-        assert hasattr(db_table_sample, 'update')
-        assert hasattr(db_table_sample, 'delete')
+        assert hasattr(db_table_sample, "create")
+        assert hasattr(db_table_sample, "get")
+        assert hasattr(db_table_sample, "update")
+        assert hasattr(db_table_sample, "delete")
 
-    def test_service_sample(self, container):
-        service_sample = container.service_sample()
+    def test_service_sample(self, service_sample):
         assert isinstance(service_sample, ServiceSample)
-        assert service_sample is not None
-        assert hasattr(service_sample, 'sample_db_table')
-

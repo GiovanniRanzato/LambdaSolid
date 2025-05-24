@@ -18,8 +18,8 @@ class TestServiceSample:
     @pytest.fixture
     def sample_data_dict(self):
         return {
-            'sample_id': '123',
-            'name': 'Test Sample',
+            "sample_id": "123",
+            "name": "Test Sample",
         }
 
     def test_init(self, service):
@@ -33,4 +33,3 @@ class TestServiceSample:
 
         sample_db_table.create.assert_called_once()
         assert result == created_obj
-

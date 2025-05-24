@@ -14,6 +14,6 @@ class Container(containers.DeclarativeContainer):
     events_registry = providers.Singleton(EventsRegistry)
     event_factory = providers.Factory(EventFactory, events_registry=events_registry)
 
-    db_serializer = providers.Singleton(DynamoDBSerializer)
-    db_table_sample = providers.Singleton(DynamoDBTableSample, config=config, serializer=db_serializer)
+    dynamo_db_serializer = providers.Singleton(DynamoDBSerializer)
+    db_table_sample = providers.Singleton(DynamoDBTableSample, config=config, serializer=dynamo_db_serializer)
     service_sample = providers.Factory(ServiceSample, sample_db_table=db_table_sample)
