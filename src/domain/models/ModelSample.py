@@ -1,11 +1,12 @@
-from dataclasses import dataclass
 from datetime import datetime
 
+from pydantic import BaseModel
+
+from domain.interfaces.ModelI import ModelI
 from repositories.db.DBObjectBase import DBObjectBase
 
 
-@dataclass
-class ModelSample(DBObjectBase):
+class ModelSample(DBObjectBase, BaseModel, ModelI):
     sample_id: str = None
     name: str = None
     created_at: datetime = None
