@@ -4,37 +4,43 @@ from dataclasses import dataclass
 from datetime import datetime
 import pytest
 
-from repositories.db.DBObjectBase import DBObjectBase
 from repositories.db.dynamo_db.DynamoDBSerializer import DynamoDBSerializer
+from repositories.interfaces.DBObjectI import DBObjectI
 
+class DummyDBObject(DBObjectI):
+    def model_dump(self) -> dict:
+        return self.__dict__
 
 @dataclass
-class DummyFlatModel(DBObjectBase):
+class DummyFlatModel(DummyDBObject):
     id: str
     name: str
     datetime: datetime
 
+    def model_dump(self) -> dict:
+        return self.__dict__
+
 
 @dataclass
-class DummyNestedModel(DBObjectBase):
+class DummyNestedModel(DummyDBObject):
     id: str
     nested_prop: DummyFlatModel
 
 
 @dataclass
-class DummyNestedListModel(DBObjectBase):
+class DummyNestedListModel(DummyDBObject):
     id: str
     nested_prop: list[DummyFlatModel]
 
 
 @dataclass
-class DummyNestedDict(DBObjectBase):
+class DummyNestedDict(DummyDBObject):
     id: str
     nested_prop: dict
 
 
 @dataclass
-class DummyNestedListStr(DBObjectBase):
+class DummyNestedListStr(DummyDBObject):
     id: str
     nested_prop: list[str]
 
@@ -45,7 +51,7 @@ class DummyInvalidModel:
 
 
 @dataclass
-class DummyNestedInvalidModel(DBObjectBase):
+class DummyNestedInvalidModel(DummyDBObject):
     id: str
     nested_prop: DummyInvalidModel
 

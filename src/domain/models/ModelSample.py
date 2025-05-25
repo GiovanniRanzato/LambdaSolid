@@ -3,10 +3,10 @@ from datetime import datetime
 from pydantic import BaseModel
 
 from domain.interfaces.ModelI import ModelI
-from repositories.db.DBObjectBase import DBObjectBase
+from repositories.interfaces.DBObjectI import DBObjectI
 
 
-class ModelSample(DBObjectBase, BaseModel, ModelI):
+class ModelSample(BaseModel, ModelI, DBObjectI):
     sample_id: str = None
     name: str = None
     created_at: datetime = None

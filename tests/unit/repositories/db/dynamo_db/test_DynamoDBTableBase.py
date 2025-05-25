@@ -4,8 +4,8 @@ from unittest.mock import MagicMock
 import pytest
 
 from infrastructure.interfaces.ConfigI import ConfigI
-from repositories.db.DBObjectBase import DBObjectBase
 from repositories.db.dynamo_db.DynamoDBTableBase import DynamoDBTableBase
+from repositories.interfaces.DBObjectI import DBObjectI
 from repositories.interfaces.DBSerializerI import DBSerializerI
 
 
@@ -32,9 +32,12 @@ class TestDynamoDBTableBase:
     @pytest.fixture
     def db_obj(self):
         @dataclass
-        class DummyDBObjClass(DBObjectBase):
+        class DummyDBObjClass(DBObjectI):
             id: str = None
             attr: str = "test_value"
+
+            def model_dump(self) -> dict:
+                return self.__dict__
 
         return DummyDBObjClass()
 
