@@ -47,12 +47,14 @@ src/
 │   └── interfaces/               # Abstract ports (e.g. RepositoryI)
 │
 ├── infrastructure/              # Frameworks & technical details
+│   ├── config/                  # Configuration components (e.g. Config, SecretManager)
 │   ├── factories/               # Technical components factories (e.g. EventFactory, HandlerFactory)
 │   ├── interfaces/              # Technical interfaces (e.g. EventI, HandlerI)
 │   ├── App.py                   # Application orchestrator (wires everything)
-│   ├── EventsRegistry.py        # Internal event routing registry
-│   └── containers.py            # Dependency injection setup (via `dependency_injector`)
-│
+│   ├── containers.py            # Dependency injection setup for core structure (via `dependency_injector`)
+│   ├── depends.py               # Dependencies definitions for the application
+│   └── EventsRegistry.py        # Internal event routing registry 
+│   
 ├── api/                         # Input adapters (events/APIs)
 │   └── api_gateway/             # Logic for API Gateway events (e.g. FastAPI routing)
 │
