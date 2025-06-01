@@ -4,8 +4,8 @@ from dependency_injector.wiring import inject, Provide
 from infrastructure.factories.EventFactory import EventFactory
 from infrastructure.EventsRegistry import EventsRegistry
 
-from inputs.api.api_gateway.events.APIGatewayEventV1 import APIGatewayEventV1
-from inputs.api.api_gateway.APIGatewayHandler import APIGatewayHandler
+from inputs.api_gateway.events.APIGatewayEventV1 import APIGatewayEventV1
+from inputs.api_gateway.APIGatewayHandler import APIGatewayHandler
 from infrastructure.containers import Container
 from infrastructure.interfaces.HandlerI import HandlerI
 

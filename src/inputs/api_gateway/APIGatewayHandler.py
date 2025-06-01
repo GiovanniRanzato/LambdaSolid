@@ -3,9 +3,9 @@ from fastapi import FastAPI
 from mangum import Mangum
 from starlette.middleware.cors import CORSMiddleware
 
-from inputs.api.api_gateway.exceptions.ExceptionsRegistry import ExceptionRegistry
-from inputs.api.api_gateway.routes.routes import routers
-from inputs.api.api_gateway.interfaces.APIGatewayRequestI import APIGatewayRequestI
+from inputs.api_gateway.exceptions.ExceptionsRegistry import ExceptionRegistry
+from inputs.api_gateway.routes.routes import routers
+from inputs.api_gateway.interfaces.APIGatewayRequestI import APIGatewayRequestI
 
 from infrastructure.containers import Container
 from infrastructure.interfaces.ConfigI import ConfigI

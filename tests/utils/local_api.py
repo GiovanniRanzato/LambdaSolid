@@ -1,9 +1,9 @@
-from inputs.api.api_gateway.APIGatewayHandler import APIGatewayHandler
+from inputs.api_gateway.APIGatewayHandler import APIGatewayHandler
 from infrastructure.containers import Container
 
 if __name__ == "__main__":
     import uvicorn
-    from inputs.api.api_gateway.events.APIGatewayEventV1 import APIGatewayEventV1
+    from inputs.api_gateway.events.APIGatewayEventV1 import APIGatewayEventV1
     from dotenv import load_dotenv
     load_dotenv()
 

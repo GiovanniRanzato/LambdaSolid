@@ -5,8 +5,8 @@ from starlette import status
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
-from inputs.api.api_gateway.exceptions.models.UnauthorizedException import UnauthorizedException
-from inputs.api.api_gateway.interfaces.ExceptionHandlerI import ExceptionHandlerI
+from inputs.api_gateway.exceptions.models.UnauthorizedException import UnauthorizedException
+from inputs.api_gateway.interfaces.ExceptionHandlerI import ExceptionHandlerI
 
 
 class UnauthorizedExceptionHandler(ExceptionHandlerI):

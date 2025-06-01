@@ -6,7 +6,7 @@ from infrastructure.factories.EventFactory import EventFactory
 class Container(containers.DeclarativeContainer):
     wiring_modules = [
         "src.main",
-        "src.inputs.api.api_gateway.routes.default.v1.sample",
+        "src.inputs.api_gateway.routes.default.v1.sample",
     ]
 
     wiring_config = containers.WiringConfiguration(modules=wiring_modules)

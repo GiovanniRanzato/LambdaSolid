@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from inputs.api.api_gateway.routes.default.v1 import health_check
-from inputs.api.api_gateway.routes.default.v1 import sample
+from inputs.api_gateway.routes.default.v1 import health_check
+from inputs.api_gateway.routes.default.v1 import sample
 
 router = APIRouter()
 

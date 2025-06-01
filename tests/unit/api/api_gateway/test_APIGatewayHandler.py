@@ -2,8 +2,8 @@ from unittest.mock import MagicMock
 
 import pytest
 from fastapi import FastAPI
-from inputs.api.api_gateway.APIGatewayHandler import APIGatewayHandler
-from inputs.api.api_gateway.interfaces.APIGatewayRequestI import APIGatewayRequestI
+from inputs.api_gateway.APIGatewayHandler import APIGatewayHandler
+from inputs.api_gateway.interfaces.APIGatewayRequestI import APIGatewayRequestI
 from infrastructure.config.Config import Config
 
 
@@ -44,7 +44,7 @@ class TestApiGatewayHandler:
         assert isinstance(app, FastAPI)
 
     def test_handle_with_mangum(self, handler, event, mocker):
-        mangum_mock = mocker.patch("inputs.api.api_gateway.APIGatewayHandler.Mangum")
+        mangum_mock = mocker.patch("inputs.api_gateway.APIGatewayHandler.Mangum")
         app_mock = mocker.MagicMock()
         mangum_mock.return_value = app_mock
 

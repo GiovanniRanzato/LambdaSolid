@@ -1,6 +1,6 @@
 import pytest
 
-from inputs.api.api_gateway.exceptions.models.UnauthorizedException import UnauthorizedException
+from inputs.api_gateway.exceptions.models.UnauthorizedException import UnauthorizedException
 
 
 class TestUnauthorizedException:
