@@ -2,9 +2,9 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from repositories.notifications.interfaces.MessageI import MessageI
-from repositories.notifications.interfaces.NotificactionI import NotificationI
-from repositories.notifications.sns.SNSClient import SNSClient
+from outputs.notifications.interfaces.MessageI import MessageI
+from outputs.notifications.interfaces.NotificactionI import NotificationI
+from outputs.notifications.sns.SNSClient import SNSClient
 
 
 class TestSNSClient:

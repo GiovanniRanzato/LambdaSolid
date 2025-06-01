@@ -2,11 +2,11 @@ import uuid
 from typing import Type
 
 from infrastructure.interfaces.ConfigI import ConfigI
-from repositories.db.dynamo_db.DynamoDB import DynamoDB
+from outputs.db.dynamo_db.DynamoDB import DynamoDB
 
-from repositories.db.interfaces.DBObjectI import DBObjectI
-from repositories.db.interfaces.DBSerializerI import DBSerializerI
-from repositories.db.interfaces.DBTableI import DBTableI
+from outputs.db.interfaces.DBObjectI import DBObjectI
+from outputs.db.interfaces.DBSerializerI import DBSerializerI
+from outputs.db.interfaces.DBTableI import DBTableI
 
 
 class DynamoDBTableBase(DynamoDB, DBTableI):

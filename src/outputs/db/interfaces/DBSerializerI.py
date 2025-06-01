@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from repositories.db.interfaces.DBObjectI import DBObjectI
+from outputs.db.interfaces.DBObjectI import DBObjectI
 
 
 class DBSerializerI(ABC):

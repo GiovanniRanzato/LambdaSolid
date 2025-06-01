@@ -1,7 +1,7 @@
 from domain.models.ModelSample import ModelSample
 from infrastructure.interfaces.ConfigI import ConfigI
-from repositories.db.dynamo_db.DynamoDBTableBase import DynamoDBTableBase
-from repositories.db.interfaces.DBSerializerI import DBSerializerI
+from outputs.db.dynamo_db.DynamoDBTableBase import DynamoDBTableBase
+from outputs.db.interfaces.DBSerializerI import DBSerializerI
 
 
 class DynamoDBTableSample(DynamoDBTableBase):

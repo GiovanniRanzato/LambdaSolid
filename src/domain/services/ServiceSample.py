@@ -1,6 +1,6 @@
 from domain.interfaces.ModelI import ModelI
 from domain.models.ModelSample import ModelSample
-from repositories.db.interfaces.DBTableI import DBTableI
+from outputs.db.interfaces.DBTableI import DBTableI
 
 
 class ServiceSample:

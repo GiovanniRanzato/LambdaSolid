@@ -2,8 +2,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from repositories.db.dynamo_db.DynamoDBTableSample import DynamoDBTableSample
-
+from outputs.db.dynamo_db.DynamoDBTableSample import DynamoDBTableSample
 
 class TestDynamoDBTableSample:
     @pytest.fixture
@@ -23,8 +22,6 @@ class TestDynamoDBTableSample:
 
     @pytest.fixture
     def dynamo_db_table_sample(self, config, serializer):
-        from repositories.db.dynamo_db.DynamoDBTableSample import DynamoDBTableSample
-
         return DynamoDBTableSample(config=config, serializer=serializer)
 
     def test_init(self, dynamo_db_table_sample, config):

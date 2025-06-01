@@ -7,9 +7,9 @@ from infrastructure.containers import Container
 from infrastructure.EventsRegistry import EventsRegistry
 from infrastructure.factories.EventFactory import EventFactory
 from infrastructure.interfaces.ConfigI import ConfigI
-from repositories.db.dynamo_db.DynamoDBTableSample import DynamoDBTableSample
-from repositories.db.interfaces.DBSerializerI import DBSerializerI
-from repositories.db.interfaces.DBTableI import DBTableI
+from outputs.db.dynamo_db.DynamoDBTableSample import DynamoDBTableSample
+from outputs.db.interfaces.DBSerializerI import DBSerializerI
+from outputs.db.interfaces.DBTableI import DBTableI
 
 
 class TestContainers:

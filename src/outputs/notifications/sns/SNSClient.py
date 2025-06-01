@@ -1,7 +1,7 @@
 import boto3
 
-from repositories.notifications.interfaces.MessageI import MessageI
-from repositories.notifications.interfaces.NotificactionI import NotificationI
+from outputs.notifications.interfaces.MessageI import MessageI
+from outputs.notifications.interfaces.NotificactionI import NotificationI
 
 
 class SNSClient(NotificationI):

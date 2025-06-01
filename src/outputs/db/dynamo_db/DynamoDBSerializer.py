@@ -1,8 +1,8 @@
 from datetime import datetime
 from typing import Dict, Any, get_args, get_origin
 
-from repositories.db.interfaces.DBObjectI import DBObjectI
-from repositories.db.interfaces.DBSerializerI import DBSerializerI
+from outputs.db.interfaces.DBObjectI import DBObjectI
+from outputs.db.interfaces.DBSerializerI import DBSerializerI
 
 
 class DynamoDBSerializer(DBSerializerI):

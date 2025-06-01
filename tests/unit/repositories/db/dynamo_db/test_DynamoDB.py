@@ -3,7 +3,7 @@ from unittest.mock import MagicMock
 import pytest
 
 from infrastructure.interfaces.ConfigI import ConfigI
-from repositories.db.dynamo_db.DynamoDB import DynamoDB
+from outputs.db.dynamo_db.DynamoDB import DynamoDB
 
 
 class TestDynamoDB:

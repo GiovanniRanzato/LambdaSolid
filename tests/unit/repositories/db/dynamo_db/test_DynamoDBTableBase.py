@@ -4,9 +4,9 @@ from unittest.mock import MagicMock
 import pytest
 
 from infrastructure.interfaces.ConfigI import ConfigI
-from repositories.db.dynamo_db.DynamoDBTableBase import DynamoDBTableBase
-from repositories.db.interfaces.DBObjectI import DBObjectI
-from repositories.db.interfaces.DBSerializerI import DBSerializerI
+from outputs.db.dynamo_db.DynamoDBTableBase import DynamoDBTableBase
+from outputs.db.interfaces.DBObjectI import DBObjectI
+from outputs.db.interfaces.DBSerializerI import DBSerializerI
 
 
 class TestDynamoDBTableBase:
@@ -54,8 +54,8 @@ class TestDynamoDBTableBase:
 
     @pytest.fixture
     def dynamo_db_table_base(self, config, serializer, db_obj, boto3_resource, boto3_client, mocker):
-        mocker.patch("repositories.db.dynamo_db.DynamoDB.boto3.resource", return_value=boto3_resource)
-        mocker.patch("repositories.db.dynamo_db.DynamoDB.boto3.client", return_value=boto3_client)
+        mocker.patch("outputs.db.dynamo_db.DynamoDB.boto3.resource", return_value=boto3_resource)
+        mocker.patch("outputs.db.dynamo_db.DynamoDB.boto3.client", return_value=boto3_client)
         return DynamoDBTableBase(
             table_name="test_table", pk="id", obj_class=db_obj.__class__, serializer=serializer, config=config
         )
