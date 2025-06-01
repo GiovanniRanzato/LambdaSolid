@@ -32,3 +32,11 @@ class TestServiceSample:
 
         sample_db_table.create.assert_called_once()
         assert result == sample_model
+
+    def test_create_type_error(self, service, sample_db_table):
+        sample_db_table.create.return_value = "Not a ModelSample"
+
+        with pytest.raises(TypeError):
+            service.create(sample=MagicMock(spec=DBObjectI))
+
+        sample_db_table.create.assert_called_once()
