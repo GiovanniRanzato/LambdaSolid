@@ -88,3 +88,42 @@ class TestIntegrationSampleDynamoDBTable:
         assert retrieved_model.sample_id == created_item.sample_id
         assert retrieved_model.name == sample_model.name
         assert retrieved_model.name == created_item.name
+
+
+    def test_retrieve_data_from_changed_db_object(self, db_table_sample, sample_model):
+        @dataclass
+        class DummyNestedModel(DBObjectI):
+            prop: str
+
+            def model_dump(self) -> dict:
+                return self.__dict__
+
+        @dataclass
+        class DummySampleModel:
+            sample_id: str
+            nested_prop: str
+
+            def model_dump(self) -> dict:
+                return self.__dict__
+
+        @dataclass
+        class DummySampleModelChanged:
+            sample_id: str
+            nested_prop: DummyNestedModel
+
+            def model_dump(self) -> dict:
+                return self.__dict__
+
+        sample_model = DummySampleModel(sample_id=uuid.uuid4().hex, nested_prop='str')
+
+        sample_model.sample_id = ""
+
+        db_table_sample.obj_class = DummySampleModel
+        created_model = db_table_sample.create(sample_model)
+
+        db_table_sample.obj_class = DummySampleModelChanged
+
+        result = db_table_sample.get(created_model.sample_id)
+
+        assert isinstance(result, DummySampleModelChanged)
+
