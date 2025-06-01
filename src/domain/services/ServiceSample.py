@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from domain.interfaces.ModelI import ModelI
 from domain.models.ModelSample import ModelSample
 from outputs.db.interfaces.DBTableI import DBTableI
@@ -12,3 +14,12 @@ class ServiceSample:
         if not isinstance(created, ModelI):
             raise TypeError(f"Expected ModelSample, got {type(created)}")
         return created
+
+    def process_event_sample(self, sample_name: str) -> None:
+        sample = ModelSample(
+            name=sample_name,
+            created_at=datetime.now(),
+            updated_at=datetime.now()
+        )
+        self.create(sample)
+        print(f"Processed sample: {sample.model_dump_json()}")
