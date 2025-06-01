@@ -5,6 +5,7 @@ if __name__ == "__main__":
     import uvicorn
     from inputs.api_gateway.events.APIGatewayEventV1 import APIGatewayEventV1
     from dotenv import load_dotenv
+
     load_dotenv()
 
     container = Container()

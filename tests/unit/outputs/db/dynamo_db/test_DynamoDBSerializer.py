@@ -7,9 +7,11 @@ import pytest
 from outputs.db.dynamo_db.DynamoDBSerializer import DynamoDBSerializer
 from outputs.db.interfaces.DBObjectI import DBObjectI
 
+
 class DummyDBObject(DBObjectI):
     def model_dump(self) -> dict:
         return self.__dict__
+
 
 @dataclass
 class DummyFlatModel(DummyDBObject):

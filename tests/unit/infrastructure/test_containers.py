@@ -58,4 +58,3 @@ class TestContainers:
     def test_event_factory(self, container, event_factory, registry):
         assert isinstance(event_factory, EventFactory)
         assert event_factory.events_registry is registry
-

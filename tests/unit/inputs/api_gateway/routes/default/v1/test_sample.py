@@ -19,7 +19,7 @@ class TestSample:
             sample_id=uuid.uuid4().hex if set_id else None,
             name=uuid.uuid4().hex,
             created_at=datetime.datetime.now(),
-            updated_at=datetime.datetime.now()
+            updated_at=datetime.datetime.now(),
         )
 
     @pytest.mark.asyncio
@@ -36,4 +36,3 @@ class TestSample:
 
         body = json.loads(result.body)
         assert body == created_service.model_dump_json()
-

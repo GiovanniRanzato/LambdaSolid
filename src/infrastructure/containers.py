@@ -3,6 +3,7 @@ from dependency_injector import containers, providers
 from infrastructure.depends import get_config, get_events_registry
 from infrastructure.factories.EventFactory import EventFactory
 
+
 class Container(containers.DeclarativeContainer):
     wiring_modules = [
         "src.main",
@@ -14,5 +15,3 @@ class Container(containers.DeclarativeContainer):
     config = providers.Singleton(lambda: get_config())
     events_registry = providers.Singleton(lambda: get_events_registry())
     event_factory = providers.Factory(EventFactory, events_registry=events_registry)
-
-

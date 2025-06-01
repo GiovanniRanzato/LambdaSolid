@@ -9,6 +9,7 @@ class DummyDBObjectBase(DBObjectI):
     def model_dump(self) -> dict:
         return self.__dict__
 
+
 class TestDBObject:
     @pytest.fixture
     def db_object(self):

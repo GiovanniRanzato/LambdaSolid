@@ -6,8 +6,14 @@ from domain.services.ServiceSample import ServiceSample
 from infrastructure.EventsRegistry import EventsRegistry
 from infrastructure.factories.EventFactory import EventFactory
 from infrastructure.interfaces.ConfigI import ConfigI
-from infrastructure.depends import get_config, get_events_registry, get_events_factory, get_dynamo_db_serializer, \
-    get_db_table_sample, get_service_sample
+from infrastructure.depends import (
+    get_config,
+    get_events_registry,
+    get_events_factory,
+    get_dynamo_db_serializer,
+    get_db_table_sample,
+    get_service_sample,
+)
 from outputs.db.dynamo_db.DynamoDBSerializer import DynamoDBSerializer
 from outputs.db.dynamo_db.DynamoDBTableSample import DynamoDBTableSample
 from outputs.db.interfaces.DBSerializerI import DBSerializerI

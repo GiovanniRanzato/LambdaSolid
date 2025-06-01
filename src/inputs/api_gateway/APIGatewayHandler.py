@@ -62,4 +62,3 @@ class APIGatewayHandler(HandlerI):
             allow_methods=self.cors_allow_methods,
             allow_headers=self.cors_allow_headers,
         )
-

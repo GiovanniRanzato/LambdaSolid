@@ -4,6 +4,7 @@ import pytest
 
 from outputs.db.dynamo_db.DynamoDBTableSample import DynamoDBTableSample
 
+
 class TestDynamoDBTableSample:
     @pytest.fixture
     def config(self):

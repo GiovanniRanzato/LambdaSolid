@@ -20,7 +20,7 @@ class TestSNSClient:
         return SNSClient(
             region_name="us-east-1",
             topic_arn="arn:aws:sns:us-east-1:123456789012:MyTopic",
-            endpoint_url="http://localhost:4566"
+            endpoint_url="http://localhost:4566",
         )
 
     def test_init(self, sns_client, boto3_client):
@@ -34,7 +34,4 @@ class TestSNSClient:
 
         sns_client.publish(message)
 
-        sns_client.client.publish.assert_called_once_with(
-            Message="Test message",
-            TopicArn=sns_client.topic_arn
-        )
+        sns_client.client.publish.assert_called_once_with(Message="Test message", TopicArn=sns_client.topic_arn)
