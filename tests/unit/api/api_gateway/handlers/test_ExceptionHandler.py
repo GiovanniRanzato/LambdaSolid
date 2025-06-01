@@ -4,8 +4,8 @@ from unittest.mock import MagicMock
 import pytest
 from starlette.responses import JSONResponse
 
-from api.api_gateway.exceptions.handlers.ExceptionHandler import ExceptionHandler
-from api.api_gateway.interfaces.ExceptionHandlerI import ExceptionHandlerI
+from inputs.api.api_gateway.exceptions.handlers.ExceptionHandler import ExceptionHandler
+from inputs.api.api_gateway.interfaces.ExceptionHandlerI import ExceptionHandlerI
 
 
 class TestExceptionHandlerBase:

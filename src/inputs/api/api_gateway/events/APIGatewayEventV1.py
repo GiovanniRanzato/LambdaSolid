@@ -1,5 +1,5 @@
-from api.api_gateway.events.APIGatewayEventBase import APIGatewayEventBase
-from api.api_gateway.interfaces.APIGatewayRequestI import APIGatewayRequestI
+from inputs.api.api_gateway.events.APIGatewayEventBase import APIGatewayEventBase
+from inputs.api.api_gateway.interfaces.APIGatewayRequestI import APIGatewayRequestI
 
 
 class APIGatewayEventV1(APIGatewayRequestI, APIGatewayEventBase):

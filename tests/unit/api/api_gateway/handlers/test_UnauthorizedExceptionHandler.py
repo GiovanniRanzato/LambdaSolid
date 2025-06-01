@@ -4,9 +4,9 @@ from unittest.mock import MagicMock
 import pytest
 from starlette.responses import JSONResponse
 
-from api.api_gateway.exceptions.handlers.UnauthorizedExceptionHandler import UnauthorizedExceptionHandler
-from api.api_gateway.exceptions.models.UnauthorizedException import UnauthorizedException
-from api.api_gateway.interfaces.ExceptionHandlerI import ExceptionHandlerI
+from inputs.api.api_gateway.exceptions.handlers.UnauthorizedExceptionHandler import UnauthorizedExceptionHandler
+from inputs.api.api_gateway.exceptions.models.UnauthorizedException import UnauthorizedException
+from inputs.api.api_gateway.interfaces.ExceptionHandlerI import ExceptionHandlerI
 
 
 class TestUnauthorizedExceptionHandler:

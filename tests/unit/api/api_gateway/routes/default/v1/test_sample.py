@@ -4,7 +4,7 @@ import uuid
 from unittest.mock import MagicMock
 
 import pytest
-from api.api_gateway.routes.default.v1.sample import create
+from inputs.api.api_gateway.routes.default.v1.sample import create
 from domain.models.ModelSample import ModelSample
 
 

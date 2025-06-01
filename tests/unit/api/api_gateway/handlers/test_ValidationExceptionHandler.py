@@ -5,8 +5,8 @@ import pytest
 from fastapi.exceptions import RequestValidationError
 from starlette.responses import JSONResponse
 
-from api.api_gateway.exceptions.handlers.ValidationExceptionHandler import ValidationExceptionHandler
-from api.api_gateway.interfaces.ExceptionHandlerI import ExceptionHandlerI
+from inputs.api.api_gateway.exceptions.handlers.ValidationExceptionHandler import ValidationExceptionHandler
+from inputs.api.api_gateway.interfaces.ExceptionHandlerI import ExceptionHandlerI
 
 
 class TestValidationExceptionHandler:

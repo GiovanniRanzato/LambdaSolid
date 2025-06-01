@@ -1,5 +1,5 @@
 import pytest
-from api.api_gateway.routes.default.v1.health_check import health_check
+from inputs.api.api_gateway.routes.default.v1.health_check import health_check
 
 
 class TestHealthCheck:

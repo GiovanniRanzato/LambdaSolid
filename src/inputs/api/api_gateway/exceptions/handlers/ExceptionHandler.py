@@ -6,7 +6,7 @@ from starlette import status
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
-from api.api_gateway.interfaces.ExceptionHandlerI import ExceptionHandlerI
+from inputs.api.api_gateway.interfaces.ExceptionHandlerI import ExceptionHandlerI
 
 
 class ExceptionHandler(ExceptionHandlerI):

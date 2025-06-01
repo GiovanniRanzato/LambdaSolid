@@ -1,6 +1,6 @@
 import pytest
-from api.api_gateway.exceptions.ExceptionsRegistry import ExceptionRegistry
-from api.api_gateway.interfaces.ExceptionHandlerI import ExceptionHandlerI
+from inputs.api.api_gateway.exceptions.ExceptionsRegistry import ExceptionRegistry
+from inputs.api.api_gateway.interfaces.ExceptionHandlerI import ExceptionHandlerI
 
 
 class TestExceptionRegistry:
