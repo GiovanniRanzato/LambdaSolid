@@ -1,4 +1,4 @@
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, call
 
 import pytest
 
@@ -7,6 +7,10 @@ from infrastructure.containers import Container
 from infrastructure.factories.EventFactory import EventFactory
 from infrastructure.EventsRegistry import EventsRegistry
 from infrastructure.interfaces.HandlerI import HandlerI
+from inputs.api_gateway.APIGatewayHandler import APIGatewayHandler
+from inputs.api_gateway.events.APIGatewayEventV1 import APIGatewayEventV1
+from inputs.sns.events.SNSEventSample import SNSEventSample
+from inputs.sns.handlers.SNSEventSampleHandler import SNSEventHandlerSample
 
 
 class TestApp:
@@ -20,7 +24,7 @@ class TestApp:
 
     @pytest.fixture
     def app(self, events_registry, event_factory):
-        events_registry.register_event = MagicMock()
+        events_registry.register_event = MagicMock(return_value=None)
         return App(event_factory=event_factory, events_registry=events_registry)
 
     def test_init(self, app, events_registry, event_factory):
@@ -28,8 +32,10 @@ class TestApp:
         assert app.event_factory == event_factory
         assert isinstance(app, App)
 
-        # Check if the events_registry has been called to register events
-        # events_registry.register_event.assert_called_once_with(APIGatewayEvent, APIGatewayHandler)
+        events_registry.register_event.assert_has_calls([
+            call(APIGatewayEventV1, APIGatewayHandler),
+            call(SNSEventSample, SNSEventHandlerSample)
+        ])
 
     def test_run(self, app, event_factory, events_registry, mocker):
         event = {"key": "value"}

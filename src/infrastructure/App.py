@@ -8,6 +8,8 @@ from inputs.api_gateway.events.APIGatewayEventV1 import APIGatewayEventV1
 from inputs.api_gateway.APIGatewayHandler import APIGatewayHandler
 from infrastructure.containers import Container
 from infrastructure.interfaces.HandlerI import HandlerI
+from inputs.sns.events.SNSEventSample import SNSEventSample
+from inputs.sns.handlers.SNSEventSampleHandler import SNSEventHandlerSample
 
 
 class App:
@@ -26,6 +28,7 @@ class App:
         # Register events and relative handlers here:
         # Example:
         self.events_registry.register_event(APIGatewayEventV1, APIGatewayHandler)
+        self.events_registry.register_event(SNSEventSample, SNSEventHandlerSample)
         pass
 
     def run(self, event: dict, context: dict):
