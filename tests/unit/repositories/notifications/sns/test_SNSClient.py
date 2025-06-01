@@ -1,10 +1,9 @@
 from unittest.mock import MagicMock
 
-import boto3
 import pytest
 
-from repositories.interfaces.MessageI import MessageI
-from repositories.interfaces.NotificactionI import NotificationI
+from repositories.notifications.interfaces.MessageI import MessageI
+from repositories.notifications.interfaces.NotificactionI import NotificationI
 from repositories.notifications.sns.SNSClient import SNSClient
 
 
