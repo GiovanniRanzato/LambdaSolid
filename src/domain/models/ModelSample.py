@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Optional
 
 from pydantic import BaseModel
 
@@ -7,7 +8,7 @@ from repositories.interfaces.DBObjectI import DBObjectI
 
 
 class ModelSample(BaseModel, ModelI, DBObjectI):
-    sample_id: str = None
-    name: str = None
-    created_at: datetime = None
-    updated_at: datetime = None
+    sample_id: Optional[str] = None
+    name: str
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
