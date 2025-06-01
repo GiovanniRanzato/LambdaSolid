@@ -2,11 +2,12 @@ from unittest.mock import MagicMock
 
 import pytest
 
+from domain.services.ServiceSample import ServiceSample
 from infrastructure.EventsRegistry import EventsRegistry
 from infrastructure.factories.EventFactory import EventFactory
 from infrastructure.interfaces.ConfigI import ConfigI
 from infrastructure.depends import get_config, get_events_registry, get_events_factory, get_dynamo_db_serializer, \
-    get_db_table_sample
+    get_db_table_sample, get_service_sample
 from repositories.db.dynamo_db.DynamoDBSerializer import DynamoDBSerializer
 from repositories.db.dynamo_db.DynamoDBTableSample import DynamoDBTableSample
 from repositories.interfaces.DBSerializerI import DBSerializerI
@@ -35,8 +36,16 @@ class TestDepends:
         return MagicMock(spec=DynamoDBSerializer)
 
     @pytest.fixture
+    def dynamo_db_table_sample(self):
+        return MagicMock(spec=DynamoDBTableSample)
+
+    @pytest.fixture
     def dynamo_db_serializer_mock(self, dynamo_db_serializer, mocker):
         return mocker.patch("infrastructure.depends.DynamoDBSerializer", return_value=dynamo_db_serializer)
+
+    @pytest.fixture
+    def dynamo_db_table_sample_mock(self, dynamo_db_table_sample, mocker):
+        return mocker.patch("infrastructure.depends.DynamoDBTableSample", return_value=dynamo_db_table_sample)
 
     def test_get_config(self):
         result = get_config()
@@ -70,3 +79,9 @@ class TestDepends:
         assert isinstance(result, DBTableI)
         dynamo_db_serializer_mock.assert_called_once()
         config_mock.assert_called_once()
+
+    def test_service_sample(self, dynamo_db_table_sample_mock, dynamo_db_table_sample):
+        service_sample = get_service_sample()
+        assert isinstance(service_sample, ServiceSample)
+        assert service_sample.sample_db_table == dynamo_db_table_sample
+        dynamo_db_table_sample_mock.assert_called_once()
