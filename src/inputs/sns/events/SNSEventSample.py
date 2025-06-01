@@ -1,8 +1,21 @@
 import json
 from inputs.sns.events.SNSEventBase import SNSEventBase
-from inputs.sns.interfaces.SNSEventI import SNSEventI
+from inputs.sns.interfaces.SNSEventSampleI import SNSEventSampleI
 
 
-class SNSEventSample(SNSEventBase, SNSEventI):
-    def get_content(self) -> dict:
-        return json.loads(self.event.get("Sns").get("Message"))
+class SNSEventSample(SNSEventBase, SNSEventSampleI):
+
+    @staticmethod
+    def _get_content(event: dict) -> dict:
+        return json.loads(event.get("Sns").get("Message"))
+
+    @classmethod
+    def is_valid(cls, event: dict) -> bool:
+        super().is_valid(event)
+        params = cls._get_content(event)
+        return params.get("name") is not None and isinstance(params.get("name"), str)
+
+    def get_event_sample_name(self) -> str:
+        return self._get_content(self.event).get("name")
+
+

@@ -20,6 +20,6 @@ class SNSEventBase(EventI):
 
     @classmethod
     def is_valid(cls, event: dict) -> bool:
-        if event.get("EventSource") != "aws:sns" and event.get("Sns").get("Message") is None:
+        if event.get("EventSource") != "aws:sns" or event.get("Sns", {}).get("Message") is None:
             return False
         return json.loads(event.get("Sns").get("Message")).get("type") == cls.get_event_type()

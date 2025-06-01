@@ -9,7 +9,7 @@ class TestSNSEventBase:
         return {
             "EventSource": "aws:sns",
             "Sns": {
-                "Message": '{"type": "SNSEventBase"}'
+                "Message": '{"type": "SNSEventBase"}',
             }
         }
 
@@ -32,6 +32,10 @@ class TestSNSEventBase:
         assert isinstance(event, SNSEventBase)
         assert event.event == sns_event_dict
 
+    def test_fail_from_dict(self):
+        with pytest.raises(ValueError):
+            SNSEventBase.from_dict({}, None)
+
     def test_is_valid(self, sns_event_dict):
         assert SNSEventBase.is_valid(sns_event_dict) is True
 
@@ -43,3 +47,5 @@ class TestSNSEventBase:
             }
         }
         assert SNSEventBase.is_valid(invalid_event) is False
+
+

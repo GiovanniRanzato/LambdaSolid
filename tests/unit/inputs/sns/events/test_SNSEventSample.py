@@ -10,7 +10,7 @@ class TestSNSEventSample:
         return {
             "EventSource": "aws:sns",
             "Sns": {
-                "Message": '{"type": "SNSEventSample"}'
+                "Message": '{"type": "SNSEventSample", "name": "SampleEvent"}',
             }
         }
 
@@ -25,5 +25,8 @@ class TestSNSEventSample:
         assert isinstance(sns_event_base, EventI)
         assert sns_event_base.event == sns_event_dict
 
-    def test_get_content(self, sns_event_base):
-        assert sns_event_base.get_content() == {"type": "SNSEventSample"}
+    def test_is_valid(self, sns_event_base):
+        assert sns_event_base.is_valid(sns_event_base.event) is True
+
+    def test_get_event_sample_name(self, sns_event_base):
+        assert sns_event_base.get_event_sample_name() == 'SampleEvent'
