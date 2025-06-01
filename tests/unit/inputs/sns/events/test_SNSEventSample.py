@@ -24,3 +24,6 @@ class TestSNSEventSample:
         assert isinstance(sns_event_base, SNSEventSample)
         assert isinstance(sns_event_base, EventI)
         assert sns_event_base.event == sns_event_dict
+
+    def test_get_content(self, sns_event_base):
+        assert sns_event_base.get_content() == {"type": "SNSEventSample"}

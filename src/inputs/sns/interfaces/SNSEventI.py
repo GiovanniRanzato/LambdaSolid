@@ -1,5 +1,8 @@
 from abc import ABC, abstractmethod
+from typing import Any
 
 
 class SNSEventI(ABC):
-    pass
+    @abstractmethod
+    def get_content(self) -> dict:
+        """Returns the content of the SNS event."""
