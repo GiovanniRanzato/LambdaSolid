@@ -1,7 +1,7 @@
 import pytest
 
 from inputs.api_gateway.events.APIGatewayEventV1 import APIGatewayEventV1
-from unit.api.api_gateway.events.test_APIGatewayEventBase import TestAPIGatewayEventBase
+from unit.inputs.api_gateway.events.test_APIGatewayEventBase import TestAPIGatewayEventBase
 
 
 class TestAPIGatewayEventV1(TestAPIGatewayEventBase):
