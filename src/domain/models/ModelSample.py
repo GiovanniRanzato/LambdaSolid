@@ -4,7 +4,7 @@ from typing import Optional
 from pydantic import BaseModel
 
 from domain.interfaces.ModelI import ModelI
-from repositories.interfaces.DBObjectI import DBObjectI
+from repositories.db.interfaces.DBObjectI import DBObjectI
 
 
 class ModelSample(BaseModel, ModelI, DBObjectI):

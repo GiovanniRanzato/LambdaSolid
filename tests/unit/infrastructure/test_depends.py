@@ -10,8 +10,8 @@ from infrastructure.depends import get_config, get_events_registry, get_events_f
     get_db_table_sample, get_service_sample
 from repositories.db.dynamo_db.DynamoDBSerializer import DynamoDBSerializer
 from repositories.db.dynamo_db.DynamoDBTableSample import DynamoDBTableSample
-from repositories.interfaces.DBSerializerI import DBSerializerI
-from repositories.interfaces.DBTableI import DBTableI
+from repositories.db.interfaces.DBSerializerI import DBSerializerI
+from repositories.db.interfaces.DBTableI import DBTableI
 
 
 class TestDepends:

@@ -4,8 +4,8 @@ from domain.models.ModelSample import ModelSample
 from domain.services.ServiceSample import ServiceSample
 import pytest
 
-from repositories.interfaces.DBObjectI import DBObjectI
-from repositories.interfaces.DBTableI import DBTableI
+from repositories.db.interfaces.DBObjectI import DBObjectI
+from repositories.db.interfaces.DBTableI import DBTableI
 
 
 class TestServiceSample:

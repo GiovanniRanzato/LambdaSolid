@@ -8,8 +8,8 @@ from domain.models.ModelSample import ModelSample
 from infrastructure import depends
 from infrastructure.containers import Container
 from repositories.db.dynamo_db.DynamoDBTableSample import DynamoDBTableSample
-from repositories.interfaces.DBObjectI import DBObjectI
-from repositories.interfaces.DBTableI import DBTableI
+from repositories.db.interfaces.DBObjectI import DBObjectI
+from repositories.db.interfaces.DBTableI import DBTableI
 
 
 class TestIntegrationSampleDynamoDBTable:

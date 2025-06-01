@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from repositories.interfaces.DBObjectI import DBObjectI
+from repositories.db.interfaces.DBObjectI import DBObjectI
 
 
 class DBTableI(ABC):

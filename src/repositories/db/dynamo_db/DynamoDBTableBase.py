@@ -4,9 +4,9 @@ from typing import Type
 from infrastructure.interfaces.ConfigI import ConfigI
 from repositories.db.dynamo_db.DynamoDB import DynamoDB
 
-from repositories.interfaces.DBObjectI import DBObjectI
-from repositories.interfaces.DBSerializerI import DBSerializerI
-from repositories.interfaces.DBTableI import DBTableI
+from repositories.db.interfaces.DBObjectI import DBObjectI
+from repositories.db.interfaces.DBSerializerI import DBSerializerI
+from repositories.db.interfaces.DBTableI import DBTableI
 
 
 class DynamoDBTableBase(DynamoDB, DBTableI):

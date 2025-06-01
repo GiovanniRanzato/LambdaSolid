@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 import pytest
 
-from repositories.interfaces.DBObjectI import DBObjectI
+from repositories.db.interfaces.DBObjectI import DBObjectI
 
 
 class DummyDBObjectBase(DBObjectI):

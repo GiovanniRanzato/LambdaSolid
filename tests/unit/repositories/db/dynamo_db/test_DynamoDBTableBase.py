@@ -5,8 +5,8 @@ import pytest
 
 from infrastructure.interfaces.ConfigI import ConfigI
 from repositories.db.dynamo_db.DynamoDBTableBase import DynamoDBTableBase
-from repositories.interfaces.DBObjectI import DBObjectI
-from repositories.interfaces.DBSerializerI import DBSerializerI
+from repositories.db.interfaces.DBObjectI import DBObjectI
+from repositories.db.interfaces.DBSerializerI import DBSerializerI
 
 
 class TestDynamoDBTableBase:

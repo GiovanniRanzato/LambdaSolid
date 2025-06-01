@@ -5,7 +5,7 @@ from datetime import datetime
 import pytest
 
 from repositories.db.dynamo_db.DynamoDBSerializer import DynamoDBSerializer
-from repositories.interfaces.DBObjectI import DBObjectI
+from repositories.db.interfaces.DBObjectI import DBObjectI
 
 class DummyDBObject(DBObjectI):
     def model_dump(self) -> dict:
