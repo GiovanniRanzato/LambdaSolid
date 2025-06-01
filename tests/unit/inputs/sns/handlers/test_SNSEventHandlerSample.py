@@ -7,7 +7,7 @@ from inputs.sns.interfaces.SNSEventSampleI import SNSEventSampleI
 
 class TestSNSEventHandlerSample:
     @pytest.fixture
-    def service_sample(self,  mocker):
+    def service_sample(self, mocker):
         return mocker.MagicMock(spec=ServiceSample)
 
     @pytest.fixture

@@ -13,7 +13,4 @@ class MessageSample(MessageI):
         self.sample_name = sample_name
 
     def __str__(self) -> str:
-        return json.dumps({
-            "type": self.event_type,
-            "name": self.sample_name
-        })
+        return json.dumps({"type": self.event_type, "name": self.sample_name})

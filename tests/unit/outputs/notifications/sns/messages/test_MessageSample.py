@@ -18,4 +18,3 @@ class TestMessageSample:
         expected_str = '{"type": "SNSEventSample", "name": "TestSample"}'
         assert str(message_sample) == expected_str
         assert isinstance(str(message_sample), str)
-

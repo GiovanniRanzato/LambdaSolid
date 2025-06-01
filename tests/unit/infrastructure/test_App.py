@@ -32,10 +32,9 @@ class TestApp:
         assert app.event_factory == event_factory
         assert isinstance(app, App)
 
-        events_registry.register_event.assert_has_calls([
-            call(APIGatewayEventV1, APIGatewayHandler),
-            call(SNSEventSample, SNSEventHandlerSample)
-        ])
+        events_registry.register_event.assert_has_calls(
+            [call(APIGatewayEventV1, APIGatewayHandler), call(SNSEventSample, SNSEventHandlerSample)]
+        )
 
     def test_run(self, app, event_factory, events_registry, mocker):
         event = {"key": "value"}

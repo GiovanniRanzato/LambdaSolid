@@ -16,10 +16,6 @@ class ServiceSample:
         return created
 
     def process_event_sample(self, sample_name: str) -> None:
-        sample = ModelSample(
-            name=sample_name,
-            created_at=datetime.now(),
-            updated_at=datetime.now()
-        )
+        sample = ModelSample(name=sample_name, created_at=datetime.now(), updated_at=datetime.now())
         self.create(sample)
         print(f"Processed sample: {sample.model_dump_json()}")

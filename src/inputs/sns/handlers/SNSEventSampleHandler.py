@@ -16,5 +16,3 @@ class SNSEventHandlerSample(HandlerI):
         logging.info("Start handling SNSEventSample")
         self.service_sample.process_event_sample(event.get_event_sample_name())
         logging.info("Finish handling SNSEventSample")
-
-

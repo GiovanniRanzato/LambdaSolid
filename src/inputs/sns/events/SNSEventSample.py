@@ -4,7 +4,6 @@ from inputs.sns.interfaces.SNSEventSampleI import SNSEventSampleI
 
 
 class SNSEventSample(SNSEventBase, SNSEventSampleI):
-
     @staticmethod
     def _get_content(event: dict) -> dict:
         return json.loads(event.get("Sns").get("Message"))
@@ -17,5 +16,3 @@ class SNSEventSample(SNSEventBase, SNSEventSampleI):
 
     def get_event_sample_name(self) -> str:
         return self._get_content(self.event).get("name")
-
-

@@ -3,6 +3,7 @@ import pytest
 from infrastructure.interfaces.EventI import EventI
 from inputs.sns.events.SNSEventBase import SNSEventBase
 
+
 class TestSNSEventBase:
     @pytest.fixture
     def sns_event_dict(self):
@@ -10,14 +11,12 @@ class TestSNSEventBase:
             "EventSource": "aws:sns",
             "Sns": {
                 "Message": '{"type": "SNSEventBase"}',
-            }
+            },
         }
 
     @pytest.fixture
     def sns_event_base(self, sns_event_dict):
-        return SNSEventBase(
-            event=sns_event_dict
-        )
+        return SNSEventBase(event=sns_event_dict)
 
     def test_init(self, sns_event_base, sns_event_dict):
         assert isinstance(sns_event_base, SNSEventBase)
@@ -40,12 +39,5 @@ class TestSNSEventBase:
         assert SNSEventBase.is_valid(sns_event_dict) is True
 
     def test_not_valid_event(self):
-        invalid_event = {
-            "EventSource": "aws:sns",
-            "Sns": {
-                "Message": '{"type": "InvalidEventType"}'
-            }
-        }
+        invalid_event = {"EventSource": "aws:sns", "Sns": {"Message": '{"type": "InvalidEventType"}'}}
         assert SNSEventBase.is_valid(invalid_event) is False
-
-
