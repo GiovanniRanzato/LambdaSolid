@@ -18,8 +18,14 @@ class SNSEventBase(EventI):
 
         return cls(event=event)
 
+    @staticmethod
+    def _get_content(event: dict) -> dict:
+        return json.loads(event.get("Sns").get("Message"))
+
     @classmethod
     def is_valid(cls, event: dict) -> bool:
         if event.get("EventSource") != "aws:sns" or event.get("Sns", {}).get("Message") is None:
             return False
-        return json.loads(event.get("Sns").get("Message")).get("type") == cls.get_event_type()
+
+        return cls._get_content(event).get("type") == cls.get_event_type()
+

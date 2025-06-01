@@ -4,10 +4,6 @@ from inputs.sns.interfaces.SNSEventSampleI import SNSEventSampleI
 
 
 class SNSEventSample(SNSEventBase, SNSEventSampleI):
-    @staticmethod
-    def _get_content(event: dict) -> dict:
-        return json.loads(event.get("Sns").get("Message"))
-
     @classmethod
     def is_valid(cls, event: dict) -> bool:
         super().is_valid(event)
