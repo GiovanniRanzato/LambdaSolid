@@ -28,4 +28,3 @@ class SNSEventBase(EventI):
             return False
 
         return cls._get_content(event).get("type") == cls.get_event_type()
-
