@@ -41,10 +41,10 @@ LambdaSolid follows a [Hexagonal Architecture (Ports & Adapters)](https://alista
 
 ```
 src/
-├── domain/                       # Core business logic (pure)
-│   ├── models/                   # Domain entities (e.g. Order, User)
-│   ├── services/                 # Business use cases
-│   └── interfaces/               # Abstract ports (e.g. RepositoryI)
+├── domain/                      # Core business logic (pure)
+│   ├── models/                  # Domain entities (e.g. Order, User)
+│   ├── services/                # Business use cases
+│   └── interfaces/              # Abstract ports (e.g. ModelI)
 │
 ├── infrastructure/              # Frameworks & technical details
 │   ├── config/                  # Configuration components (e.g. Config, SecretManager)
@@ -55,11 +55,13 @@ src/
 │   ├── depends.py               # Dependencies definitions for the application
 │   └── EventsRegistry.py        # Internal event routing registry 
 │   
-├── api/                         # Input adapters (events/APIs)
+├── inputs/                      # Input adapters (events/APIs)
 │   └── api_gateway/             # Logic for API Gateway events (e.g. FastAPI routing)
+│   └── sns/                     # Logic for SNS events
 │
-├── repositories/                # Output adapters (DB, SNS, etc.)
-│   └── db/                      # Example: DB repositories implementing interfaces
+├── outputs/                     # Output adapters (DB, SNS, etc.)
+│   └── db/                      # Example: DynamoDB repositories implementing interfaces
+│   └── notifications/           # Example: SNS repositories implementing interfaces
 │
 ├── main.py                      # AWS Lambda entrypoint
 └── tests/                       # Unit/integration tests (mirroring the src structure)
@@ -69,6 +71,6 @@ src/
 
 - `domain/` is **framework-agnostic** and contains the heart of the business logic.
 - `infrastructure/` deals with **how** the logic is executed (frameworks, DI, factories).
-- `api/` and `repositories/` are **adapters** that handle external I/O.
+- `inputs/` and `outputs/` are **adapters** that handle external I/O.
 - `main.py` is the **entrypoint** for your AWS Lambda deployment.
 - Interfaces like `EventI`, `HandlerI`, and the `EventsRegistry` are placed in `infrastructure/` because they **serve technical routing**, not domain rules.
