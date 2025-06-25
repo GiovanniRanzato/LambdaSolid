@@ -5,7 +5,8 @@ from inputs.sns.interfaces.SNSEventSampleI import SNSEventSampleI
 class SNSEventSample(SNSEventBase, SNSEventSampleI):
     @classmethod
     def is_valid(cls, event: dict) -> bool:
-        super().is_valid(event)
+        if not super().is_valid(event):
+            return False
         params = cls._get_content(event)
         return params.get("name") is not None and isinstance(params.get("name"), str)
 

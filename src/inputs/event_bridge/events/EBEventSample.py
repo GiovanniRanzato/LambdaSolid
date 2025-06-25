@@ -5,7 +5,8 @@ from inputs.event_bridge.interfaces.EBEventSampleI import EBEventSampleI
 class EBEventSample(EBEventBase, EBEventSampleI):
     @classmethod
     def is_valid(cls, event: dict) -> bool:
-        super().is_valid(event)
+        if not super().is_valid(event):
+            return False
 
         detail = event.get("detail")
         return isinstance(detail, dict) and isinstance(detail.get("sample_name"), str)

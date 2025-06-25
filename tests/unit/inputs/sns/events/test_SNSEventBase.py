@@ -38,6 +38,17 @@ class TestSNSEventBase:
     def test_is_valid(self, sns_event_dict):
         assert SNSEventBase.is_valid(sns_event_dict) is True
 
+    @pytest.mark.parametrize("invalid_event", [
+        {},
+        {"EventSource": "wrong_source"},
+        {"WrongKey": "a value"},
+        {"EventSource": "aws:sns", "Sns": {"Message": None}},
+        {"EventSource": "aws:sns", "Sns": {}},
+        {"EventSource": "aws:sns", "Sns": {"Message": '{"type": "AnotherType"}'}}
+    ])
+    def test_is_valid_with_invalid_event(self, invalid_event):
+        assert SNSEventBase.is_valid(invalid_event) is False
+
     def test_not_valid_event(self):
         invalid_event = {"EventSource": "aws:sns", "Sns": {"Message": '{"type": "InvalidEventType"}'}}
         assert SNSEventBase.is_valid(invalid_event) is False
