@@ -35,8 +35,10 @@ class TestSNSEventBase:
         with pytest.raises(ValueError):
             SNSEventBase.from_dict({}, None)
 
-    def test_is_valid(self, sns_event_dict):
+    def test_is_valid(self, sns_event_dict, mocker):
+        super_mock = mocker.patch("inputs.sns.events.SNSEventBase.SNSEventBase.is_valid", return_value=True)
         assert SNSEventBase.is_valid(sns_event_dict) is True
+        super_mock.assert_called_once_with(sns_event_dict)
 
     @pytest.mark.parametrize("invalid_event", [
         {},
