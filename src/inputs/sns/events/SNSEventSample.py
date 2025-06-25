@@ -1,4 +1,3 @@
-import json
 from inputs.sns.events.SNSEventBase import SNSEventBase
 from inputs.sns.interfaces.SNSEventSampleI import SNSEventSampleI
 

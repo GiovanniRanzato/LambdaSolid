@@ -7,14 +7,8 @@ class EBEventSample(EBEventBase, EBEventSampleI):
     def is_valid(cls, event: dict) -> bool:
         super().is_valid(event)
 
-        detail = event.get('detail')
-        return (
-                isinstance(detail, dict) and
-                isinstance(detail.get('sample_name'), str)
-        )
+        detail = event.get("detail")
+        return isinstance(detail, dict) and isinstance(detail.get("sample_name"), str)
 
     def get_event_sample_name(self):
-        return self.event.get('detail').get('sample_name')
-
-
-
+        return self.event.get("detail").get("sample_name")
