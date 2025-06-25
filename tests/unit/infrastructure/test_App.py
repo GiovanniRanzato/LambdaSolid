@@ -9,6 +9,8 @@ from infrastructure.EventsRegistry import EventsRegistry
 from infrastructure.interfaces.HandlerI import HandlerI
 from inputs.api_gateway.APIGatewayHandler import APIGatewayHandler
 from inputs.api_gateway.events.APIGatewayEventV1 import APIGatewayEventV1
+from inputs.event_bridge.events.EBEventSample import EBEventSample
+from inputs.event_bridge.handlers.EBEventSampleHandler import EBEventSampleHandler
 from inputs.sns.events.SNSEventSample import SNSEventSample
 from inputs.sns.handlers.SNSEventSampleHandler import SNSEventHandlerSample
 
@@ -32,9 +34,11 @@ class TestApp:
         assert app.event_factory == event_factory
         assert isinstance(app, App)
 
-        events_registry.register_event.assert_has_calls(
-            [call(APIGatewayEventV1, APIGatewayHandler), call(SNSEventSample, SNSEventHandlerSample)]
-        )
+        assert events_registry.method_calls ==  [
+            call.register_event(APIGatewayEventV1, APIGatewayHandler),
+            call.register_event(SNSEventSample, SNSEventHandlerSample),
+            call.register_event(EBEventSample, EBEventSampleHandler)
+        ]
 
     def test_run(self, app, event_factory, events_registry, mocker):
         event = {"key": "value"}
