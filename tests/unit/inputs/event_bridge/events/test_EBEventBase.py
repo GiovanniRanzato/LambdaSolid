@@ -1,9 +1,18 @@
-import uuid
+from infrastructure.interfaces.EventI import EventI
 from inputs.event_bridge.events.EBEventBase import EBEventBase
 import pytest
 
 
 class TestEBEventBase:
+    invalid_event_list = [
+        "invalid type",
+        {},
+        {"invalid.key": ["arn:aws:events:rule/EBEventBase"]},
+        {"source": "invalid.source"},
+        {"source": "invalid.source", "resources": ["arn:aws:events:rule/AnotherEvent"]},
+        {"source": "aws.events", "resources": ["arn:aws:sns:rule/InvalidEvent"]}
+    ]
+
     @pytest.fixture
     def eb_event_base_dict(self):
         return {
@@ -19,19 +28,18 @@ class TestEBEventBase:
 
     def test_init_eb_event_base(self, eb_event_base):
         assert isinstance(eb_event_base, EBEventBase)
+        assert isinstance(eb_event_base, EventI)
+
+    @pytest.mark.parametrize("invalid_event_dict", invalid_event_list )
+    def test_init_with_invalid_event(self, invalid_event_dict):
+        with pytest.raises(ValueError, match="Invalid event format for EBEventBase"):
+            EBEventBase(event={})
 
     def test_is_valid(self, eb_event_base_dict):
         assert EBEventBase.is_valid(eb_event_base_dict) is True
 
-    @pytest.mark.parametrize("invalid_event", [
-        "invalid type",
-        {},
-        {"invalid.key": ["arn:aws:events:rule/EBEventBase"]},
-        {"source": "invalid.source"},
-        {"source": "invalid.source", "resources": ["arn:aws:events:rule/AnotherEvent"]},
-        {"source": "aws.events", "resources": ["arn:aws:sns:rule/InvalidEvent"]}
-    ])
-    def test_is_valid_invalid_event(self, invalid_event):
+    @pytest.mark.parametrize("invalid_event", invalid_event_list)
+    def test_is_valid_with_invalid_event(self, invalid_event):
         invalid_event = {
             "source": "aws.sns",
             "resources": ["arn:aws:events:rule/EBEventBase"]

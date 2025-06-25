@@ -3,6 +3,8 @@ from infrastructure.interfaces.EventI import EventI
 
 class EBEventBase (EventI):
     def __init__(self, event: dict):
+        if not self.is_valid(event):
+            raise ValueError(f"Invalid event format for EBEventBase: {event}")
         self.event = event
 
     @classmethod
