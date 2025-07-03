@@ -61,6 +61,7 @@ class TestConfig:
         os.environ.pop("SECRETS_REGION", None)
 
         config = Config()
+        config.init = True
 
         # Act
         missing = config.get("NOT_DEFINED")
