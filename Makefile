@@ -79,3 +79,13 @@ localstack:
 
 dynamodb:
 	AWS_REGION=$(DYNAMODB_REGION) DYNAMO_ENDPOINT=$(DYNAMODB_ENDPOINT) dynamodb-admin
+
+sqldb_migration:
+	@alembic revision --autogenerate -m "Init schema"clear
+
+sqldb_migrate:
+	@alembic upgrade head
+
+sqldb_init:
+	@make sqldb_migration
+	@make sqldb_migrate
