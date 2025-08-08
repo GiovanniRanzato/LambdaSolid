@@ -11,7 +11,7 @@ from infrastructure.depends import (
     get_events_registry,
     get_events_factory,
     get_dynamo_db_serializer,
-    get_db_table_sample,
+    get_dynamo_db_table_sample,
     get_service_sample,
 )
 from outputs.db.dynamo_db.DynamoDBSerializer import DynamoDBSerializer
@@ -80,7 +80,7 @@ class TestDepends:
             "DYNAMODB_SAMPLE_TABLE_PK": "sample_id",
         }.get(key)
 
-        result = get_db_table_sample()
+        result = get_dynamo_db_table_sample()
         assert isinstance(result, DynamoDBTableSample)
         assert isinstance(result, DBTableI)
         dynamo_db_serializer_mock.assert_called_once()

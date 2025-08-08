@@ -22,7 +22,7 @@ class DynamoDBSerializer(DBSerializerI):
 
         return {k: convert(v) for k, v in db_object.model_dump().items()}
 
-    def from_db(self, data: Dict[str, Any], obj_class: DBObjectI) -> DBObjectI:
+    def from_db(self, data: Dict[str, Any], obj_class: type[DBObjectI]) -> DBObjectI:
         annotations = getattr(obj_class, "__annotations__", {})
 
         def convert_field(k, v):
