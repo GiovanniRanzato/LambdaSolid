@@ -153,6 +153,13 @@ class TestSqlDBTableBase:
 
         result = sql_db_table_base.delete("dummy_id")
 
+        assert result is True
+
+        # check if the session was used correctly
+        session_mock.delete.assert_called_once_with(dummy_orm_object)
+        session_mock.commit.assert_called_once()
+        session_mock.get.assert_called_once_with(sql_db_table_base.orm_class, "dummy_id")
+
     def test_delete_not_found(self, sql_db_table_base):
         # Mock the session_local context manager (with self.session_local() as session:)
         session_mock = MagicMock()
