@@ -7,7 +7,7 @@ class TestMain:
     def eb_event(self):
         return {
             "source": "aws.events",
-            "resources": ["arn:aws:events:rule/EBEventBase"],
+            "resources": ["arn:aws:events:rule/EBEventSample"],
             "detail": {"sample_name": "SampleEvent"},
         }
 

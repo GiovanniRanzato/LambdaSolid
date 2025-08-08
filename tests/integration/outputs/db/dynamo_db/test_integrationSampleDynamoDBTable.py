@@ -22,7 +22,7 @@ class TestIntegrationSampleDynamoDBTable:
 
     @pytest.fixture
     def db_table_sample(self) -> DBTableI:
-        return depends.get_db_table_sample()
+        return depends.get_dynamo_db_table_sample()
 
     @pytest.fixture
     def sample_model(self):
